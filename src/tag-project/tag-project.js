@@ -1,12 +1,25 @@
-$ = require('../../node_modules/jquery/dist/jquery.min');
+// require("../style/style.css");
 
+var $ = require('../../node_modules/jquery/dist/jquery.min');
+var view = require('./render.view');
+import { Tag } from './tag' ;
 
-var test = function test(){
-    console.log("Hello World!");
+let tagList = [];
+
+let init = function ({ initialValue: initialValue = null, options: options = null }){
+    if ( initialValue ){
+        objectToTag(initialValue);
+    }
+    view.render(tagList);
 }
 
+function objectToTag(_listTag){
+    for( let tag of _listTag ){
+        tagList.push(new Tag( tag.value, tag.color) );
+    }
+}
 
 module.exports = {
-        test: test
+        init: init
 }
 
