@@ -1,12 +1,13 @@
-// require("../style/style.css");
+import { style } from '../style/style.css';
 
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 var view = require('./render.view');
 import { Tag } from './tag' ;
 
 let tagList = [];
+let tagListMenu = [];
 
-let init = function ({ initialValue: initialValue = null, options: options = null }){
+let init = function ({ initialValue: initialValue = null, listTagMenu: listTagMenu ,options: options = null }){
     if ( initialValue ){
         objectToTag(initialValue);
     }
@@ -15,7 +16,7 @@ let init = function ({ initialValue: initialValue = null, options: options = nul
 
 function objectToTag(_listTag){
     for( let tag of _listTag ){
-        tagList.push(new Tag( tag.value, tag.color) );
+        tagList.push(new Tag( tag.value, tag.colorBackground) );
     }
 }
 

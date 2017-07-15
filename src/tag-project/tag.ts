@@ -1,12 +1,12 @@
 
 export class Tag{
 
-    value;
-    color;
+    public value;
+    public colorBackground;
 
-    constructor(_value, _color = '#46799b'){
+    constructor(_value, _colorBackground = '#e0eaf1'){
         this.value = _value;
-        this.color = _color;
+        this.colorBackground = _colorBackground;
     }
 
 }

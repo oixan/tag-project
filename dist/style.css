@@ -1,0 +1,23 @@
+.tagProject {
+  display: inline-block; }
+
+.tagProject ul {
+  list-style-type: none; }
+
+.tagProject ul li {
+  display: inline-block;
+  padding: 3px 5px;
+  margin-right: 8px;
+  background: whitesmoke; }
+
+.tagProject ul .tagProjectButtonAdd {
+  background: inherit; }
+
+.tagProject ul .tagProjectButtonAdd button {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  outline: none; }
+
+.tagProject ul .tagProjectButtonAdd button:hover {
+  background-color: #e6e6e6; }
