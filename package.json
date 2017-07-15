@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "jquery": "^3.2.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "name": "oixan-demo1",
+  "version": "0.1.0",
+  "description": "demo1",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oixan/demo1.git"
+  },
+  "keywords": [
+    "demo1"
+  ],
+  "author": "Benedetto Sciuto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oixan/demo1/issues"
+  },
+  "homepage": "https://github.com/oixan/demo1#readme",
+  "devDependencies": {
+    "webpack": "^3.2.0"
+  }
+}
