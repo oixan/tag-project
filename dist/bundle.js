@@ -2498,7 +2498,7 @@ module.exports = __webpack_amd_options__;
 
 var $ = __webpack_require__(0);
 
-var render = function render(_listTag) {
+var render = function render(_listTag, _listMenuTag) {
     $(document).ready(function () {
         $("[data-tagProject='tag']").map(function (i, el) {
             var ul = $(el).append($("<ul>")).find('ul');
@@ -2527,13 +2527,63 @@ var render = function render(_listTag) {
                 }
             }
 
-            addTagButton(ul);
+            addTagButton(ul, _listTag);
         });
     });
 };
 
-function addTagButton(_parent) {
+function addTagButton(_parent, _listMenuTag) {
+    // Add the button tag 
     $(_parent).append($("<li class='tagProjectButtonAdd'>").append($("<button>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
+
+    // Add tag modal windows
+    var liButtonAddTag = $(_parent).find($('.tagProjectButtonAdd'))[0];
+
+    // open dropdown tag
+    $(liButtonAddTag).click(function (e) {
+        var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
+        $(dropdown).addClass("active");
+        e.stopPropagation();
+    });
+
+    // close dropdown tag
+    $(document).click(function (e) {
+        e.stopPropagation();
+        var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
+
+        //check if the clicked area is dropDown or not
+        if ($(dropdown).has(e.target).length === 0) {
+            $(dropdown).removeClass('active');
+        }
+    });
+
+    $("<ul class='tagProjectDropdown'>").appendTo(liButtonAddTag);
+
+    var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = _listMenuTag[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var tag = _step2.value;
+
+            $(dropdown).append("<li style=background-color:" + tag.colorBackground + ">" + tag.value + "</li>");
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
 }
 
 module.exports = {
