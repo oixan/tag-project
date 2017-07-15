@@ -12,7 +12,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oixan/demo1.git"
+    "url": "git+https://github.com/oixan/tag-project.git"
   },
   "keywords": [
     "demo1"
@@ -20,9 +20,9 @@
   "author": "Benedetto Sciuto",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/oixan/demo1/issues"
+    "url": "https://github.com/oixan/tag-project/issues"
   },
-  "homepage": "https://github.com/oixan/demo1#readme",
+  "homepage": "https://github.com/oixan/tag-project#readme",
   "devDependencies": {
     "webpack": "^3.2.0"
   }
