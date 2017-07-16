@@ -1,14 +1,17 @@
 # Tag-project  - based on Jquery -
 Tag-project is a jQuery plugin providing a unusual tag picker.
 
-Current stable version (none) : **v0.1.7**
-
-## Usage
-Examples can be found [here](http://localhost).
+Current stable version (none) : **v0.1.7** in development.
 
 ## Features
 * no require bootstrap
 * other :)
+
+## Usage
+import the library 
+<pre>
+npm install oixan-demo1
+</pre>
 
 ## Development
 Install dependencies:
