@@ -2343,7 +2343,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     } }), r.holdReady = function (a) {
     a ? r.readyWait++ : r.ready(!0);
-  }, r.isArray = Array.isArray, r.parseJSON = JSON.parse, r.nodeName = B, "function" == "function" && __webpack_require__(5) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+  }, r.isArray = Array.isArray, r.parseJSON = JSON.parse, r.nodeName = B, "function" == "function" && __webpack_require__(6) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
     return r;
   }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Vb = a.jQuery,
@@ -2351,171 +2351,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === r && (a.$ = Wb), b && a.jQuery === r && (a.jQuery = Vb), r;
   }, b || (a.jQuery = a.$ = r), r;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)(module)))
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _style = __webpack_require__(2);
-
-var tagProject1 = __webpack_require__(3);
-
-module.exports = tagProject1;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// Third parts library
-var $ = __webpack_require__(0);
-
-// My library
-var events = __webpack_require__(6);
-var core = __webpack_require__(7);
-
-function init(listTagsActive, listMenuTags, parent) {
-    core.initLists(listTagsActive, listMenuTags, parent);
-    events.initEvents(parent);
-}
-
-module.exports = {
-    init: init,
-    fn: core
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function (module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function () {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function get() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function get() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
-module.exports = __webpack_amd_options__;
-
-/* WEBPACK VAR INJECTION */}.call(exports, {}))
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var $ = __webpack_require__(0);
-
-// publiic function 
-var initEvents = function initEvents(parent) {
-    openCloseDropdownEvent(parent);
-};
-
-// private function 
-function openCloseDropdownEvent(parent) {
-
-    // open event dropdown tag
-    var liButtonAddTag = $(parent).find('.tagProjectButtonAdd');
-    $(liButtonAddTag).click(function (e) {
-        var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
-        $(dropdown).addClass("active");
-        e.stopPropagation();
-    });
-
-    // close event dropdown tag
-    $(document).click(function (e) {
-        e.stopPropagation();
-        var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
-
-        //check if the clicked area is dropdown or not
-        if ($(dropdown).has(e.target).length === 0) {
-            $(dropdown).removeClass('active');
-        }
-    });
-}
-
-module.exports = {
-    initEvents: initEvents
-};
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// Third parts library
-var $ = __webpack_require__(0);
-
-// My library
-var view = __webpack_require__(8);
-
-// public methods
-var initLists = function initLists(listTagsActive, listMenuTags, parent) {
-    view.initView(parent);
-    initListTagsActive(listTagsActive, parent);
-    initListMenuTags(listMenuTags, parent);
-};
-
-var initListTagsActive = function initListTagsActive(listTagsActive, parent) {
-    if (listTagsActive) {
-        view.loadListTagsActive(parent, listTagsActive['listTagsActive']);
-    }
-};
-
-var initListMenuTags = function initListMenuTags(listTagMenu, parent) {
-    if (listTagMenu) {
-        view.loadListMenuTags(parent, listTagMenu['listMenuTags']);
-    }
-};
-
-module.exports = {
-    initLists: initLists,
-    initListMenuTags: initListMenuTags,
-    initListTagsActive: initListTagsActive
-};
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2598,6 +2437,10 @@ var loadListMenuTags = function loadListMenuTags(parent, listTags) {
     }
 };
 
+var deletetagFromMenuList = function deletetagFromMenuList(element) {
+    $(element).remove();
+};
+
 // internal function
 function addUlList(parent) {
     $(parent).append($("<ul>"));
@@ -2613,14 +2456,193 @@ function addTagButton(parent) {
 
 function addMenuTag(parent) {
     var liButtonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
-    $(liButtonAddTag).append("<ul class='tagProjectDropdown active'>");
+    $(liButtonAddTag).append("<ul class='tagProjectDropdown'>");
 }
 
 module.exports = {
     initView: initView,
     loadListsTags: loadListsTags,
     loadListTagsActive: loadListTagsActive,
-    loadListMenuTags: loadListMenuTags
+    loadListMenuTags: loadListMenuTags,
+    deletetagFromMenuList: deletetagFromMenuList
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _style = __webpack_require__(3);
+
+var tagProject1 = __webpack_require__(4);
+
+module.exports = tagProject1;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Third parts library
+var $ = __webpack_require__(0);
+
+// My library
+var events = __webpack_require__(7);
+var core = __webpack_require__(8);
+
+function init(listTagsActive, listMenuTags, parent) {
+    core.initLists(listTagsActive, listMenuTags, parent);
+    events.initEvents(parent);
+}
+
+module.exports = {
+    init: init,
+    fn: core
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function () {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function get() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function get() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
+module.exports = __webpack_amd_options__;
+
+/* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var $ = __webpack_require__(0);
+var view = __webpack_require__(1);
+
+// publiic function 
+var initEvents = function initEvents(parent) {
+    openCloseDropdownEvent(parent);
+    closeTagMenuListEvent(parent);
+};
+
+// private function 
+function openCloseDropdownEvent(parent) {
+
+    // open event dropdown tag
+    var liButtonAddTag = $(parent).find('.tagProjectButtonAdd');
+    $(liButtonAddTag).click(function (e) {
+        var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
+        $(dropdown).addClass("active");
+        e.stopPropagation();
+    });
+
+    // close event dropdown tag
+    $(document).click(function (e) {
+        e.stopPropagation();
+        var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
+
+        //check if the clicked area is dropdown or not
+        if ($(dropdown).has(e.target).length === 0) {
+            $(dropdown).removeClass('active');
+        }
+    });
+}
+
+function closeTagMenuListEvent(parent) {
+    $(parent).find('.tagProjectDropdown .fa').map(function (pos, el) {
+        $(el).click(function (e) {
+            var tagInMenuList = e.target.parentElement;
+            view.deletetagFromMenuList(tagInMenuList);
+            e.stopPropagation();
+        });
+    });
+}
+
+module.exports = {
+    initEvents: initEvents
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Third parts library
+var $ = __webpack_require__(0);
+
+// My library
+var view = __webpack_require__(1);
+
+// public methods
+var initLists = function initLists(listTagsActive, listMenuTags, parent) {
+    view.initView(parent);
+    initListTagsActive(listTagsActive, parent);
+    initListMenuTags(listMenuTags, parent);
+};
+
+var initListTagsActive = function initListTagsActive(listTagsActive, parent) {
+    if (listTagsActive) {
+        view.loadListTagsActive(parent, listTagsActive['listTagsActive']);
+    }
+};
+
+var initListMenuTags = function initListMenuTags(listTagMenu, parent) {
+    if (listTagMenu) {
+        view.loadListMenuTags(parent, listTagMenu['listMenuTags']);
+    }
+};
+
+var deleteTagFromMenu = function deleteTagFromMenu(element) {
+    if (element) view.deletetagFromMenuList(element);
+};
+
+module.exports = {
+    initLists: initLists,
+    initListMenuTags: initListMenuTags,
+    initListTagsActive: initListTagsActive,
+    deleteTagFromMenu: deleteTagFromMenu
 };
 
 /***/ }),
@@ -2632,7 +2654,7 @@ module.exports = {
 
 var $ = __webpack_require__(0);
 
-var tagProject = __webpack_require__(1);
+var tagProject = __webpack_require__(2);
 
 var listTag = {
     'listTagsActive': [{ value: "primo tag" }, { value: "secondo tag" }, { value: "pingu tag" }]
@@ -2645,6 +2667,8 @@ var listTagMenu = {
 $("#tag1").map(function (pos, el) {
     tagProject.init(listTag, listTagMenu, el);
 });
+
+tagProject.fn.deleteTagFromMenu($(".tagProjectDropdown li").first());
 
 /***/ })
 /******/ ]);

@@ -22,3 +22,5 @@ $("#tag1").map( function ( pos, el){
     tagProject.init( listTag, listTagMenu ,el);
 });
 
+
+// tagProject.fn.deleteTagFromMenu( $(".tagProjectDropdown li").first() );

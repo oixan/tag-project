@@ -36,6 +36,10 @@ var loadListMenuTags = function (parent, listTags){
     }
 }
 
+var deletetagFromMenuList = function( element ){
+    $(element).remove();
+}
+
 // internal function
 function addUlList( parent ){
     $(parent).append($("<ul>"));
@@ -67,4 +71,5 @@ module.exports = {
         loadListsTags: loadListsTags,
         loadListTagsActive: loadListTagsActive,
         loadListMenuTags: loadListMenuTags,
+        deletetagFromMenuList: deletetagFromMenuList,
 }

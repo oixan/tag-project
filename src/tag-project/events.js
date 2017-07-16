@@ -1,8 +1,10 @@
 var $ = require('../../node_modules/jquery/dist/jquery.min');
+var view = require('./view');
 
 // publiic function 
 var initEvents = function( parent ){
     openCloseDropdownEvent( parent );
+    closeTagMenuListEvent( parent );
 }
  
 // private function 
@@ -29,6 +31,17 @@ function openCloseDropdownEvent( parent ){
 
 }
 
+function closeTagMenuListEvent( parent ){
+    $( parent ).find('.tagProjectDropdown .fa').map(
+        function (pos, el){
+            $( el ).click(function(e) {
+                var tagInMenuList = e.target.parentElement;
+                view.deletetagFromMenuList( tagInMenuList );
+                e.stopPropagation();
+            });
+        }
+    );
+}   
 
 module.exports = {
             initEvents: initEvents

@@ -25,8 +25,14 @@ let initListMenuTags = function (listTagMenu, parent){
     
 }
 
+let deleteTagFromMenu = function( element ){
+    if (element )
+        view.deletetagFromMenuList( element );
+}
+
 module.exports = {
         initLists: initLists,
         initListMenuTags: initListMenuTags,
         initListTagsActive: initListTagsActive,
+        deleteTagFromMenu: deleteTagFromMenu
 }
