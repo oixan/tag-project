@@ -7,19 +7,20 @@ var view = require('./view');
 
 // public methods
 let initLists = function (listTagsActive, listMenuTags, parent ){
+    view.initView(parent);
     initListTagsActive(listTagsActive,parent);
     initListMenuTags(listMenuTags,parent);
 }
 
 let initListTagsActive = function (listTagsActive, parent){
     if ( listTagsActive ){
-        view.render(listTagsActive['listTagsActive']);
+        view.loadListTagsActive(parent, listTagsActive['listTagsActive']);
     }
 }
 
 let initListMenuTags = function (listTagMenu, parent){
     if ( listTagMenu ){
-        view.render(listTagMenu['listTagMenu']);
+        view.loadListMenuTags(parent, listTagMenu['listTagMenu']);
     }
     
 }

@@ -1,21 +1,5 @@
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 
-var render = function (_listTag, _listMenuTag){
-    // search tagProject div container and add tag
-    $(document).ready(function() { 
-        $("[data-tagProject='tag']").map(
-                            function(i, el){
-                                var ul = $(el).append($("<ul>")).find('ul');
-                                for (let tag of _listTag)
-                                    ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
-                                                    "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-
-                                addTagButton(ul, _listTag);
-                            })
-    });                 
-}
-
-
 var initView = function(parent, listTagsActive, listMenuTags){
     addUlList(parent);
     addTagButton(parent);
@@ -29,17 +13,18 @@ var loadListsTags = function (parent, listTagsActive, listMenuTags){
 }
 
 var loadListTagsActive = function (parent, listTags){
-        var ul;
-        if ( !( ul = $(parent).find('ul')[0] ) )
-                ul = addUlList();
+    if ( !listTags ) return; 
+    var ul;
+    if ( !( ul = $(parent).find('ul')[0] ) )
+            ul = addUlList();
 
-        for (let tag of listTags)
-            ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
-                            "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+    for (let tag of listTags)
+        ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
+                        "<i class='fa fa-times' aria-hidden='true'></i> </li>");
 }
 
 var loadListMenuTags = function (parent, listTags){
-
+    if ( !listTags ) return; 
     if ( dropdown = $(parent).find('tagProjectDropdown')[0]  ){
         for (let tag of listTags)
             $(dropdown).append("<li style=background-color:" + tag.colorBackground +  ">" + tag.value +
@@ -49,7 +34,8 @@ var loadListMenuTags = function (parent, listTags){
 }
 
 function addUlList( parent ){
-    var ul = parent.append($("<ul>")).find('ul')[0];
+    $(parent).append($("<ul>"));
+    var ul =$(parent).find('ul')[0]
     return ul;
 }
 
@@ -67,14 +53,33 @@ function addTagButton( parent ){
 }
 
 function addMenuTag( parent ){
-     var liButtonAddTag = parent.find('.tagProjectButtonAdd')[0];
+     var liButtonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
      $(liButtonAddTag).append("<ul class='tagProjectDropdown active'>");
 }
 
 module.exports = {
-        listsTags: listsTags,
-        listTagsActive: listTagsActive,
-        listMenuTags: listMenuTags,
+        initView: initView,
+        loadListsTags: loadListsTags,
+        loadListTagsActive: loadListTagsActive,
+        loadListMenuTags: loadListMenuTags,
+}
+
+/*
+
+
+var render = function (_listTag, _listMenuTag){
+    // search tagProject div container and add tag
+    $(document).ready(function() { 
+        $("[data-tagProject='tag']").map(
+                            function(i, el){
+                                var ul = $(el).append($("<ul>")).find('ul');
+                                for (let tag of _listTag)
+                                    ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
+                                                    "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+
+                                addTagButton(ul, _listTag);
+                            })
+    });                 
 }
 
 
@@ -95,3 +100,5 @@ module.exports = {
             $(dropdown).removeClass('active');
         }
     })
+
+*/

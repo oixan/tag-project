@@ -1,3 +1,5 @@
+var $ = require('../node_modules/jquery/dist/jquery.min');
+
 const tagProject = require('./index.js');
 
 var listTag = {
@@ -8,4 +10,7 @@ var listTag = {
                     ]
 }
 
-tagProject.init( listTag );
+$("#tag1").map( function ( pos, el){
+    tagProject.init( listTag, null ,el);
+});
+
