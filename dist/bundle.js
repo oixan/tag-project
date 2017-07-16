@@ -2563,6 +2563,7 @@ var view = __webpack_require__(1);
 var initEvents = function initEvents(parent) {
     openCloseDropdownEvent(parent);
     closeTagMenuListEvent(parent);
+    closeTagListEvent(parent);
 };
 
 // private function 
@@ -2595,6 +2596,19 @@ function closeTagMenuListEvent(parent) {
             view.deletetagFromMenuList(tagInMenuList);
             e.stopPropagation();
         });
+    });
+}
+
+function closeTagListEvent(parent) {
+    $(parent).children().first().children().map(function (pos, el) {
+        if (pos + 1 != $(parent).children().first().children().length) {
+            var closeButton = $(el).find('.fa')[0];
+            $(closeButton).click(function (e) {
+                var tagInList = e.target.parentElement;
+                view.deletetagFromMenuList(tagInList);
+                e.stopPropagation();
+            });
+        }
     });
 }
 

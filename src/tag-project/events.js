@@ -5,6 +5,7 @@ var view = require('./view');
 var initEvents = function( parent ){
     openCloseDropdownEvent( parent );
     closeTagMenuListEvent( parent );
+    closeTagListEvent( parent );
 }
  
 // private function 
@@ -42,6 +43,21 @@ function closeTagMenuListEvent( parent ){
         }
     );
 }   
+
+function closeTagListEvent( parent ){
+    $( parent ).children().first().children().map(
+        function (pos, el){
+            if ( pos + 1 != $( parent ).children().first().children().length){
+                var closeButton = $(el).find('.fa')[0];
+                $( closeButton ).click(function(e) {
+                    var tagInList = e.target.parentElement;
+                    view.deletetagFromMenuList( tagInList );
+                    e.stopPropagation();
+                });
+            }
+        }
+    );
+}  
 
 module.exports = {
             initEvents: initEvents
