@@ -12,11 +12,13 @@ import the library
 <pre>
 npm install oixan-demo1
 </pre>
-
-## Development
 Install dependencies:
 <pre>
 npm install
+</pre>
+Import in your project (from root)
+<pre>
+var tagProject = require('./node_modules/oixan-demo1/dist/bundle.js');
 </pre>
 Build:
 <pre>
