@@ -2360,18 +2360,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-var tagProject1 = __webpack_require__(2);
+var _style = __webpack_require__(2);
+
+var tagProject1 = __webpack_require__(3);
 
 module.exports = tagProject1;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-var _style = __webpack_require__(3);
 
 var _tag = __webpack_require__(4);
 
@@ -2425,12 +2431,6 @@ function objectToTag(_listTag) {
 module.exports = {
     init: init
 };
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 4 */
@@ -2499,6 +2499,7 @@ module.exports = __webpack_amd_options__;
 var $ = __webpack_require__(0);
 
 var render = function render(_listTag, _listMenuTag) {
+    // search tagProject div container and add tag
     $(document).ready(function () {
         $("[data-tagProject='tag']").map(function (i, el) {
             var ul = $(el).append($("<ul>")).find('ul');
@@ -2510,7 +2511,7 @@ var render = function render(_listTag, _listMenuTag) {
                 for (var _iterator = _listTag[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var tag = _step.value;
 
-                    ul.append("<li style=background-color:" + tag.colorBackground + ">" + tag.value + '</li>');
+                    ul.append("<li style=background-color:" + tag.colorBackground + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
                 }
             } catch (err) {
                 _didIteratorError = true;
@@ -2534,29 +2535,30 @@ var render = function render(_listTag, _listMenuTag) {
 
 function addTagButton(_parent, _listMenuTag) {
     // Add the button tag 
-    $(_parent).append($("<li class='tagProjectButtonAdd'>").append($("<button>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
+    $(_parent).append($("<li class='tagProjectButtonAdd'>").append($("<button class='tagProjectButton'>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
 
     // Add tag modal windows
     var liButtonAddTag = $(_parent).find($('.tagProjectButtonAdd'))[0];
 
-    // open dropdown tag
+    // open event dropdown tag
     $(liButtonAddTag).click(function (e) {
         var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
         $(dropdown).addClass("active");
         e.stopPropagation();
     });
 
-    // close dropdown tag
+    // close event dropdown tag
     $(document).click(function (e) {
         e.stopPropagation();
         var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
 
-        //check if the clicked area is dropDown or not
+        //check if the clicked area is dropdown or not
         if ($(dropdown).has(e.target).length === 0) {
             $(dropdown).removeClass('active');
         }
     });
 
+    // Add tags to Menu Tags
     $("<ul class='tagProjectDropdown'>").appendTo(liButtonAddTag);
 
     var dropdown = $(liButtonAddTag).find($('.tagProjectDropdown'))[0];
@@ -2568,7 +2570,7 @@ function addTagButton(_parent, _listMenuTag) {
         for (var _iterator2 = _listMenuTag[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var tag = _step2.value;
 
-            $(dropdown).append("<li style=background-color:" + tag.colorBackground + ">" + tag.value + "</li>");
+            $(dropdown).append("<li style=background-color:" + tag.colorBackground + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
         }
     } catch (err) {
         _didIteratorError2 = true;

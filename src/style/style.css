@@ -71,6 +71,7 @@
 
 
 .tagProject .tagProjectButtonAdd .tagProjectDropdown li{
+    position: relative;
     margin-top: 8px; 
     max-width: 128px;
     overflow: hidden;
@@ -78,4 +79,31 @@
     white-space: nowrap;
     display: block;
     margin-right: initial;
+}
+
+.tagProjectDropdown  li .fa{
+    position: absolute;
+    right: 5px;
+    top: 4px;
+}
+
+.tagProject .fa{
+    margin-left: 3px;
+    border-radius: 50%;
+    background-color: #e0eaf1;
+    padding: 2px 3px;
+    color: #8e8e8e;
+}
+
+.tagProject .fa:hover{
+    color: #404040;
+    background-color: #c8d8e3;
+}
+
+.tagProject .tagProjectButton .fa{
+    margin-left: inherit;
+    border-radius: initial;
+    background-color: inherit;
+    padding: inherit;
+    color: inherit;
 }

@@ -1,4 +1,3 @@
-import { style } from '../style/style.css';
 
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 var view = require('./render.view');
