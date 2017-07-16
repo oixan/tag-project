@@ -7,7 +7,7 @@ var render = function (_listTag, _listMenuTag){
                             function(i, el){
                                 var ul = $(el).append($("<ul>")).find('ul');
                                 for (let tag of _listTag)
-                                    ul.append("<li style=background-color:" + tag.colorBackground +  ">" + tag.value + 
+                                    ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
                                                     "<i class='fa fa-times' aria-hidden='true'></i> </li>");
 
                                 addTagButton(ul, _listTag);
@@ -57,6 +57,21 @@ function addTagButton( _parent, _listMenuTag ){
                                 "<i class='fa fa-times' aria-hidden='true'></i> </li>");
 }
 
+var listsTags = function (parent, listTagsActive, listMenuTags){
+    listTagsActive(parent, listTagsActive);
+    listMenuTags(parent, listMenuTags);
+}
+
+var listTagsActive = function (parent, listTags){
+
+}
+
+var listMenuTags = function (parent, listTags){
+
+}
+
 module.exports = {
-        render: render
+        listsTags: listsTags,
+        listTagsActive: listTagsActive,
+        listMenuTags: listMenuTags,
 }

@@ -1,11 +1,11 @@
 const tagProject = require('./index.js');
 
 var listTag = {
-    'initialValue': [
+    'listTagsActive': [
                         { value: "primo tag" },
                         { value: "secondo tag" },
                         { value: "pingu tag" }
                     ]
 }
 
-tagProject.init(listTag);
+tagProject.init( listTag );
