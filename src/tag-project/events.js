@@ -1,10 +1,11 @@
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 
+// publiic function 
 var initEvents = function( parent ){
     openCloseDropdownEvent( parent );
 }
 
-
+// private function 
 function openCloseDropdownEvent( parent ){
 
     // open event dropdown tag
