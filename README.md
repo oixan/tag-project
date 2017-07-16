@@ -24,6 +24,12 @@ Current Library Versions:
 
 - jQuery: 3.2.1
 
+## Development
+Build the package
+<pre>
+npm run build
+</pre>
+
 ## Test
 Open the index.html page in dist folder.
 
