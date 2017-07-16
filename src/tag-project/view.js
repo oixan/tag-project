@@ -59,7 +59,7 @@ function addTagButton( parent ){
 
 function addMenuTag( parent ){
      var liButtonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
-     $(liButtonAddTag).append("<ul class='tagProjectDropdown active'>");
+     $(liButtonAddTag).append("<ul class='tagProjectDropdown'>");
 }
 
 module.exports = {

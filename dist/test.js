@@ -2646,9 +2646,5 @@ $("#tag1").map(function (pos, el) {
     tagProject.init(listTag, listTagMenu, el);
 });
 
-$("#tag2").map(function (pos, el) {
-    tagProject.init(listTag, listTagMenu, el);
-});
-
 /***/ })
 /******/ ]);
