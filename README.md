@@ -1,7 +1,7 @@
 # Tag-project  - based on Jquery -
 Tag-project is a jQuery plugin providing a unusual tag picker.
 
-Current stable version (none) : **v0.1.7** in development.
+Current stable version (none) : **v0.2.0** in development.
 
 ## Features
 * no require bootstrap
@@ -34,6 +34,8 @@ npm run build
 Open the index.html page in dist folder.
 
 ## History
+- 0.2.0 
+     #11: Is now possible Add new Tag in the Menu Tags Dropdown.
 - 0.1.7
   -  #10: possibility to choose default color based on colorBackgoudnLabel.css.
 
