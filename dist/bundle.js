@@ -2648,6 +2648,7 @@ function addSingleTagListActiveEvent(parent, tag) {
         view.deletetagFromMenuList(e.currentTarget);
 
         closeSingleTagListEvent(parent, newTagActive);
+        $(document).trigger("click");
         e.stopPropagation();
     });
 }
