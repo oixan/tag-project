@@ -20,10 +20,6 @@ Import in your project (from root)
 <pre>
 var tagProject = require('./node_modules/oixan-demo1/dist/bundle.js');
 </pre>
-Build:
-<pre>
-npm run build
-</pre>
 Current Library Versions:
 
 - jQuery: 3.2.1
