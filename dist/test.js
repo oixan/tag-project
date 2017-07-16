@@ -2388,7 +2388,7 @@ var loadListTagsActive = function loadListTagsActive(parent, listTags) {
         for (var _iterator = listTags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var tag = _step.value;
 
-            $("<li " + (tag.colorBackground ? " style=background-color:'" + tag.colorBackground + "'" : '') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
+            $("<li style=background-color:" + (tag.colorBackground ? tag.colorBackground : '#03A9F4') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
         }
     } catch (err) {
         _didIteratorError = true;
@@ -2418,7 +2418,7 @@ var loadListMenuTags = function loadListMenuTags(parent, listTags) {
             for (var _iterator2 = listTags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                 var tag = _step2.value;
 
-                $(dropdown).append("<li style=background-color:" + tag.colorBackground + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+                $(dropdown).append("<li style=background-color:" + (tag.colorBackground ? tag.colorBackground : '#03A9F4') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
             }
         } catch (err) {
             _didIteratorError2 = true;
@@ -2707,11 +2707,11 @@ var $ = __webpack_require__(0);
 var tagProject = __webpack_require__(2);
 
 var listTag = {
-    'listTagsActive': [{ value: "primo tag" }, { value: "secondo tag" }, { value: "pingu tag" }]
+    'listTagsActive': [{ value: "first tag", colorBackground: "#64b6b6" }, { value: "second tag" }, { value: "third tag" }]
 };
 
 var listTagMenu = {
-    'listMenuTags': [{ value: "primo tag" }, { value: "secondo tag" }, { value: "pingu tag" }]
+    'listMenuTags': [{ value: "four tag", colorBackground: "#337ab7" }, { value: "five tag" }, { value: "six tag" }]
 };
 
 $("#tag1").map(function (pos, el) {

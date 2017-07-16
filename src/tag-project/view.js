@@ -21,7 +21,7 @@ var loadListTagsActive = function (parent, listTags){
             ulLastElement = addUlList();
 
     for (let tag of listTags)
-        $("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
+        $("<li style=background-color:" + ( tag.colorBackground?  tag.colorBackground : '#03A9F4' ) +  ">"  + tag.value +
                         "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
 }
 
@@ -30,7 +30,7 @@ var loadListMenuTags = function (parent, listTags){
     var dropdown;
     if ( dropdown = $(parent).find('.tagProjectDropdown')[0]  ){
         for (let tag of listTags)
-            $(dropdown).append("<li style=background-color:" + tag.colorBackground +  ">" + tag.value +
+            $(dropdown).append("<li style=background-color:" + ( tag.colorBackground?  tag.colorBackground : '#03A9F4' ) +  ">" + tag.value +
                                     "<i class='fa fa-times' aria-hidden='true'></i> </li>");
 
     }

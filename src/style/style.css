@@ -11,7 +11,7 @@
     padding: 3px 5px;
     margin-right: 8px;
     margin-top: 6px;
-    background: whitesmoke;
+    color: white;
 }
 
 .tagProject ul li:hover{
@@ -101,14 +101,14 @@
 .tagProject .fa{
     margin-left: 3px;
     border-radius: 50%;
-    background-color: #e0eaf1;
+    background-color: rgba(0,0,0,0);
     padding: 2px 3px;
-    color: #8e8e8e;
+    color: rgba(255, 255, 255, 0.38);
 }
 
 .tagProject .fa:hover{
-    color: #404040;
-    background-color: #c8d8e3;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.37);
 }
 
 .tagProject .tagProjectButton .fa{

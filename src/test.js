@@ -4,17 +4,17 @@ const tagProject = require('./index.js');
 
 var listTag = {
     'listTagsActive': [
-                        { value: "primo tag" },
-                        { value: "secondo tag" },
-                        { value: "pingu tag" }
+                        { value: "first tag", colorBackground: "#64b6b6" },
+                        { value: "second tag" },
+                        { value: "third tag" }
                     ]
 }
 
 var listTagMenu = {
     'listMenuTags': [
-                        { value: "primo tag" },
-                        { value: "secondo tag" },
-                        { value: "pingu tag" }
+                        { value: "four tag", colorBackground: "#337ab7" },
+                        { value: "five tag" },
+                        { value: "six tag" }
                     ]
 }
 
