@@ -15,9 +15,47 @@ var render = function (_listTag, _listMenuTag){
     });                 
 }
 
-function addTagButton( _parent, _listMenuTag ){
+
+var initView = function(parent, listTagsActive, listMenuTags){
+    addUlList(parent);
+    addTagButton(parent);
+    addMenuTag(parent);
+    loadListsTags(parent, listTagsActive, listMenuTags)
+}
+
+var loadListsTags = function (parent, listTagsActive, listMenuTags){
+    loadListTagsActive(parent, listTagsActive);
+    loadListMenuTags(parent, listMenuTags);
+}
+
+var loadListTagsActive = function (parent, listTags){
+        var ul;
+        if ( !( ul = $(parent).find('ul')[0] ) )
+                ul = addUlList();
+
+        for (let tag of listTags)
+            ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
+                            "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+}
+
+var loadListMenuTags = function (parent, listTags){
+
+    if ( dropdown = $(parent).find('tagProjectDropdown')[0]  ){
+        for (let tag of listTags)
+            $(dropdown).append("<li style=background-color:" + tag.colorBackground +  ">" + tag.value +
+                                    "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+
+    }
+}
+
+function addUlList( parent ){
+    var ul = parent.append($("<ul>")).find('ul')[0];
+    return ul;
+}
+
+function addTagButton( parent ){
     // Add the button tag 
-    $(_parent).append(
+    $(parent).append(
         $("<li class='tagProjectButtonAdd'>").append(
             $("<button class='tagProjectButton'>").append(
                     $("<span>").append(
@@ -26,9 +64,19 @@ function addTagButton( _parent, _listMenuTag ){
             )
         )
     );
+}
 
-    // Add tag modal windows
-    var liButtonAddTag = $(_parent).find( $('.tagProjectButtonAdd') )[0];
+function addMenuTag( parent ){
+     var liButtonAddTag = parent.find('.tagProjectButtonAdd')[0];
+     $(liButtonAddTag).append("<ul class='tagProjectDropdown active'>");
+}
+
+module.exports = {
+        listsTags: listsTags,
+        listTagsActive: listTagsActive,
+        listMenuTags: listMenuTags,
+}
+
 
     // open event dropdown tag
     $( liButtonAddTag ).click(function(e) {
@@ -47,31 +95,3 @@ function addTagButton( _parent, _listMenuTag ){
             $(dropdown).removeClass('active');
         }
     })
-
-    // Add tags to Menu Tags
-    $("<ul class='tagProjectDropdown'>").appendTo(liButtonAddTag);
-
-    var dropdown = $(liButtonAddTag).find( $('.tagProjectDropdown') )[0];
-    for (let tag of _listMenuTag)
-        $(dropdown).append("<li style=background-color:" + tag.colorBackground +  ">" + tag.value +
-                                "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-}
-
-var listsTags = function (parent, listTagsActive, listMenuTags){
-    listTagsActive(parent, listTagsActive);
-    listMenuTags(parent, listMenuTags);
-}
-
-var listTagsActive = function (parent, listTags){
-
-}
-
-var listMenuTags = function (parent, listTags){
-
-}
-
-module.exports = {
-        listsTags: listsTags,
-        listTagsActive: listTagsActive,
-        listMenuTags: listMenuTags,
-}
