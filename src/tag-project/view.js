@@ -1,5 +1,7 @@
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 
+
+// public function
 var initView = function(parent, listTagsActive, listMenuTags){
     addUlList(parent);
     addTagButton(parent);
@@ -34,6 +36,7 @@ var loadListMenuTags = function (parent, listTags){
     }
 }
 
+// internal function
 function addUlList( parent ){
     $(parent).append($("<ul>"));
     var ul =$(parent).find('ul')[0]
@@ -65,42 +68,3 @@ module.exports = {
         loadListTagsActive: loadListTagsActive,
         loadListMenuTags: loadListMenuTags,
 }
-
-/*
-
-
-var render = function (_listTag, _listMenuTag){
-    // search tagProject div container and add tag
-    $(document).ready(function() { 
-        $("[data-tagProject='tag']").map(
-                            function(i, el){
-                                var ul = $(el).append($("<ul>")).find('ul');
-                                for (let tag of _listTag)
-                                    ul.append("<li " + ( tag.colorBackground? " style=background-color:'" + tag.colorBackground + "'": '' ) +  ">"  + tag.value +
-                                                    "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-
-                                addTagButton(ul, _listTag);
-                            })
-    });                 
-}
-
-
-    // open event dropdown tag
-    $( liButtonAddTag ).click(function(e) {
-        var dropdown = $(liButtonAddTag).find( $('.tagProjectDropdown') )[0];
-        $(dropdown).addClass("active");
-        e.stopPropagation();
-    });
-
-    // close event dropdown tag
-    $(document).click(function (e) {
-        e.stopPropagation();
-        var dropdown = $(liButtonAddTag).find( $('.tagProjectDropdown') )[0];
-
-        //check if the clicked area is dropdown or not
-        if ( $(dropdown).has(e.target).length === 0 ) {
-            $(dropdown).removeClass('active');
-        }
-    })
-
-*/

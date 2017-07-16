@@ -8,7 +8,7 @@ var core = require('./core');
 
 function init(listTagsActive, listMenuTags, parent){
     core.initLists(listTagsActive,listMenuTags,parent);
-    events.init(parent);
+    events.initEvents(parent);
 }
 
 module.exports = {
