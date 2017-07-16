@@ -35,7 +35,7 @@ Open the index.html page in dist folder.
 
 ## History
 - 0.2.0 
-     #11: Is now possible Add new Tag in the Menu Tags Dropdown.
+  - #11: Is now possible Add new Tag in the Menu Tags Dropdown.
 - 0.1.7
   -  #10: possibility to choose default color based on colorBackgoudnLabel.css.
 
