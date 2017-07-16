@@ -20,19 +20,30 @@ var loadListTagsActive = function (parent, listTags){
     if ( !( ulLastElement = $(parent).find('ul .tagProjectButtonAdd')[0] ) )
             ulLastElement = addUlList();
 
-    for (let tag of listTags)
-        $("<li style=background-color:" + ( tag.colorBackground?  tag.colorBackground : '#03A9F4' ) +  ">"  + tag.value +
+    for (let tag of listTags){
+        if ( tag.backgroundCSS )
+            tag.colorBackground = '';
+        else
+            tag.colorBackground = ( tag.colorBackground? tag.colorBackground : '#03A9F4' ) ;
+
+        $("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "' >"   + tag.value +
                         "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
+    }
 }
 
 var loadListMenuTags = function (parent, listTags){
     if ( !listTags ) return; 
     var dropdown;
     if ( dropdown = $(parent).find('.tagProjectDropdown')[0]  ){
-        for (let tag of listTags)
-            $(dropdown).append("<li style=background-color:" + ( tag.colorBackground?  tag.colorBackground : '#03A9F4' ) +  ">" + tag.value +
-                                    "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+        for (let tag of listTags){
+            if ( tag.backgroundCSS )
+                tag.colorBackground = '';
+            else
+                tag.colorBackground = ( tag.colorBackground? tag.colorBackground : '#03A9F4' ) ;
 
+            $(dropdown).append("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "' >"
+                                    + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+        }
     }
 }
 

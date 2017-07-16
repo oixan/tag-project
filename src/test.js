@@ -5,7 +5,7 @@ const tagProject = require('./index.js');
 var listTag = {
     'listTagsActive': [
                         { value: "first tag", colorBackground: "#64b6b6" },
-                        { value: "second tag" },
+                        { value: "second tag", backgroundCSS: "label-green" },
                         { value: "third tag" }
                     ]
 }

@@ -2388,7 +2388,9 @@ var loadListTagsActive = function loadListTagsActive(parent, listTags) {
         for (var _iterator = listTags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var tag = _step.value;
 
-            $("<li style=background-color:" + (tag.colorBackground ? tag.colorBackground : '#03A9F4') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
+            if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
+
+            $("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
         }
     } catch (err) {
         _didIteratorError = true;
@@ -2418,7 +2420,9 @@ var loadListMenuTags = function loadListMenuTags(parent, listTags) {
             for (var _iterator2 = listTags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                 var tag = _step2.value;
 
-                $(dropdown).append("<li style=background-color:" + (tag.colorBackground ? tag.colorBackground : '#03A9F4') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+                if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
+
+                $(dropdown).append("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
             }
         } catch (err) {
             _didIteratorError2 = true;
