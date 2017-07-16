@@ -4,7 +4,7 @@ var $ = require('../../node_modules/jquery/dist/jquery.min');
 var initEvents = function( parent ){
     openCloseDropdownEvent( parent );
 }
-
+ 
 // private function 
 function openCloseDropdownEvent( parent ){
 
