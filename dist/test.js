@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2362,113 +2362,65 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var $ = __webpack_require__(0);
 
-// public function
-var initView = function initView(parent, listTagsActive, listMenuTags) {
-    addUlList(parent);
-    addTagButton(parent);
-    addMenuTag(parent);
-    loadListsTags(parent, listTagsActive, listMenuTags);
+var addTagMenuList = function addTagMenuList(parent, tag) {
+    var dropdown = $(parent).find('.tagProjectDropdown')[0];
+
+    if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
+
+    $(dropdown).first().first().children().first().after("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+    addSingleTagListActiveEvent(parent, $(dropdown).first().first().children().get(1));
+    closeSingleTagMenuEvent($(dropdown).first().first().children().get(1));
 };
 
-var loadListsTags = function loadListsTags(parent, listTagsActive, listMenuTags) {
-    loadListTagsActive(parent, listTagsActive);
-    loadListMenuTags(parent, listMenuTags);
+// single element event
+var addSingleTagListActiveEvent = function addSingleTagListActiveEvent(parent, tag) {
+    var buttonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
+    $(tag).click(function (e) {
+        var newTagActive = $(e.currentTarget).clone().first();
+        $(newTagActive).insertBefore(buttonAddTag);
+        deletetagFromMenuList(e.currentTarget);
+
+        closeSingleTagListEvent(parent, newTagActive);
+        $(document).trigger("click");
+        e.stopPropagation();
+    });
 };
 
-var loadListTagsActive = function loadListTagsActive(parent, listTags) {
-    if (!listTags) return;
-    var ulLastElement;
-    if (!(ulLastElement = $(parent).find('ul .tagProjectButtonAdd')[0])) ulLastElement = addUlList();
-
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = listTags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var tag = _step.value;
-
-            if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
-
-            $("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
+var closeSingleTagMenuEvent = function closeSingleTagMenuEvent(tag) {
+    $(tag).find('.fa').click(function (e) {
+        var tagInMenuList = e.target.parentElement;
+        deletetagFromMenuList(tagInMenuList);
+        e.stopPropagation();
+    });
 };
 
-var loadListMenuTags = function loadListMenuTags(parent, listTags) {
-    if (!listTags) return;
-    var dropdown;
-    if (dropdown = $(parent).find('.tagProjectDropdown')[0]) {
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag) {
+    var newTagMenu = $(tag).clone().first();
+    var closeButton = $(tag).find('.fa')[0];
+    $(closeButton).click(function (e) {
+        // Remove tag on click 
+        var tagInList = e.target.parentElement;
+        deletetagFromMenuList(tagInList);
 
-        try {
-            for (var _iterator2 = listTags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var tag = _step2.value;
-
-                if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
-
-                $(dropdown).append("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-            }
-        } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                }
-            } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
-                }
-            }
-        }
-    }
+        // Add tag from active list from menu list
+        var listMenuTags = $(parent).find('.tagProjectDropdown')[0];
+        $(listMenuTags).append(newTagMenu);
+        closeSingleTagMenuEvent(newTagMenu);
+        addSingleTagListActiveEvent(parent, newTagMenu);
+        e.stopPropagation();
+    });
 };
 
 var deletetagFromMenuList = function deletetagFromMenuList(element) {
     $(element).remove();
 };
 
-// internal function
-function addUlList(parent) {
-    $(parent).append($("<ul>"));
-    var ul = $(parent).find('ul')[0];
-    return ul;
-}
-
-function addTagButton(parent) {
-    // Add the button tag 
-    var ul = $(parent).find("ul")[0];
-    $(ul).append($("<li class='tagProjectButtonAdd'>").append($("<button class='tagProjectButton'>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
-}
-
-function addMenuTag(parent) {
-    var liButtonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
-    $(liButtonAddTag).append("<ul class='tagProjectDropdown'>");
-}
-
 module.exports = {
-    initView: initView,
-    loadListsTags: loadListsTags,
-    loadListTagsActive: loadListTagsActive,
-    loadListMenuTags: loadListMenuTags,
-    deletetagFromMenuList: deletetagFromMenuList
+    addTagMenuList: addTagMenuList,
+    addSingleTagListActiveEvent: addSingleTagListActiveEvent,
+    deletetagFromMenuList: deletetagFromMenuList,
+    closeSingleTagListEvent: closeSingleTagListEvent,
+    closeSingleTagMenuEvent: closeSingleTagMenuEvent
 };
 
 /***/ }),
@@ -2561,14 +2513,15 @@ module.exports = __webpack_amd_options__;
 
 
 var $ = __webpack_require__(0);
-var view = __webpack_require__(1);
+
+var viewEvent = __webpack_require__(1);
 
 // publiic function 
 var initEvents = function initEvents(parent) {
     openCloseDropdownEvent(parent);
-    closeTagMenuListEvent(parent);
-    closeTagListEvent(parent);
-    addTagListActiveEvent(parent);
+    closeTagsMenuListEvent(parent);
+    closeTagsListEvent(parent);
+    addTagsListActiveEvent(parent);
 };
 
 // private function 
@@ -2594,62 +2547,23 @@ function openCloseDropdownEvent(parent) {
     });
 }
 
-function closeTagMenuListEvent(parent) {
+function closeTagsMenuListEvent(parent) {
     $(parent).find('.tagProjectDropdown li').map(function (pos, el) {
-        closeSingleTagMenuEvent(el);
+        viewEvent.closeSingleTagMenuEvent(el);
     });
 }
 
-function closeTagListEvent(parent) {
+function closeTagsListEvent(parent) {
     $(parent).children().first().children().map(function (pos, el) {
         if (pos + 1 != $(parent).children().first().children().length) {
-            closeSingleTagListEvent(parent, el);
+            viewEvent.closeSingleTagListEvent(parent, el);
         }
     });
 }
 
-function addTagListActiveEvent(parent) {
+function addTagsListActiveEvent(parent) {
     $(parent).find('.tagProjectDropdown li').map(function (pos, el) {
-        addSingleTagListActiveEvent(parent, el);
-    });
-}
-
-// single element event
-function closeSingleTagMenuEvent(tag) {
-    $(tag).find('.fa').click(function (e) {
-        var tagInMenuList = e.target.parentElement;
-        view.deletetagFromMenuList(tagInMenuList);
-        e.stopPropagation();
-    });
-}
-
-function closeSingleTagListEvent(parent, tag) {
-    var newTagMenu = $(tag).clone().first();
-    var closeButton = $(tag).find('.fa')[0];
-    $(closeButton).click(function (e) {
-        // Remove tag on click 
-        var tagInList = e.target.parentElement;
-        view.deletetagFromMenuList(tagInList);
-
-        // Add tag from active list from menu list
-        var listMenuTags = $(parent).find('.tagProjectDropdown')[0];
-        $(listMenuTags).append(newTagMenu);
-        closeSingleTagMenuEvent(newTagMenu);
-        addSingleTagListActiveEvent(parent, newTagMenu);
-        e.stopPropagation();
-    });
-}
-
-function addSingleTagListActiveEvent(parent, tag) {
-    var buttonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
-    $(tag).click(function (e) {
-        var newTagActive = $(e.currentTarget).clone().first();
-        $(newTagActive).insertBefore(buttonAddTag);
-        view.deletetagFromMenuList(e.currentTarget);
-
-        closeSingleTagListEvent(parent, newTagActive);
-        $(document).trigger("click");
-        e.stopPropagation();
+        viewEvent.addSingleTagListActiveEvent(parent, el);
     });
 }
 
@@ -2668,7 +2582,7 @@ module.exports = {
 var $ = __webpack_require__(0);
 
 // My library
-var view = __webpack_require__(1);
+var view = __webpack_require__(9);
 
 // public methods
 var initLists = function initLists(listTagsActive, listMenuTags, parent) {
@@ -2702,6 +2616,132 @@ module.exports = {
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var $ = __webpack_require__(0);
+
+var viewEvent = __webpack_require__(1);
+
+// public function
+var initView = function initView(parent, listTagsActive, listMenuTags) {
+    addUlList(parent);
+    addTagButton(parent);
+    addMenuTag(parent);
+    addTagInputMenuTag(parent);
+    loadListsTags(parent, listTagsActive, listMenuTags);
+};
+
+var loadListsTags = function loadListsTags(parent, listTagsActive, listMenuTags) {
+    loadListTagsActive(parent, listTagsActive);
+    loadListMenuTags(parent, listMenuTags);
+};
+
+var loadListTagsActive = function loadListTagsActive(parent, listTags) {
+    if (!listTags) return;
+    var ulLastElement;
+    if (!(ulLastElement = $(parent).find('ul .tagProjectButtonAdd')[0])) ulLastElement = addUlList();
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = listTags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var tag = _step.value;
+
+            if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
+
+            $("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+};
+
+var loadListMenuTags = function loadListMenuTags(parent, listTags) {
+    if (!listTags) return;
+    var dropdown;
+    if (dropdown = $(parent).find('.tagProjectDropdown')[0]) {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+            for (var _iterator2 = listTags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var tag = _step2.value;
+
+                if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
+
+                $(dropdown).append("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+            }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                    _iterator2.return();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
+            }
+        }
+    }
+};
+
+// internal function
+function addUlList(parent) {
+    $(parent).append($("<ul>"));
+    var ul = $(parent).find('ul')[0];
+    return ul;
+}
+
+function addTagButton(parent) {
+    // Add the button tag 
+    var ul = $(parent).find("ul")[0];
+    $(ul).append($("<li class='tagProjectButtonAdd'>").append($("<button class='tagProjectButton'>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
+}
+
+function addMenuTag(parent) {
+    var liButtonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
+    $(liButtonAddTag).append("<ul class='tagProjectDropdown'>");
+}
+
+function addTagInputMenuTag(parent) {
+    var listMenuTag = $(parent).find('.tagProjectDropdown')[0];
+    $(listMenuTag).prepend('<input>').children().first().prop("placeholder", 'Add Tag').keyup(function (e) {
+        if (e.keyCode === 13) {
+            viewEvent.addTagMenuList(parent, { value: e.target.value });
+            e.target.value = '';
+        }
+    });;
+}
+
+module.exports = {
+    initView: initView,
+    loadListsTags: loadListsTags,
+    loadListTagsActive: loadListTagsActive,
+    loadListMenuTags: loadListMenuTags
+};
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

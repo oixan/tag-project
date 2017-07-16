@@ -1,11 +1,13 @@
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 
+var viewEvent = require('./viewEvent');
 
 // public function
 var initView = function(parent, listTagsActive, listMenuTags){
     addUlList(parent);
     addTagButton(parent);
     addMenuTag(parent);
+    addTagInputMenuTag(parent);
     loadListsTags(parent, listTagsActive, listMenuTags)
 }
 
@@ -47,10 +49,6 @@ var loadListMenuTags = function (parent, listTags){
     }
 }
 
-var deletetagFromMenuList = function( element ){
-    $(element).remove();
-}
-
 // internal function
 function addUlList( parent ){
     $(parent).append($("<ul>"));
@@ -77,10 +75,19 @@ function addMenuTag( parent ){
      $(liButtonAddTag).append("<ul class='tagProjectDropdown'>");
 }
 
+function addTagInputMenuTag( parent ){
+    var listMenuTag = $(parent).find('.tagProjectDropdown')[0];
+    $(listMenuTag).prepend('<input>').children().first().prop("placeholder",'Add Tag').keyup(function (e) {
+                                                                                                if (e.keyCode === 13) {
+                                                                                                    viewEvent.addTagMenuList(parent, {value: e.target.value });
+                                                                                                    e.target.value = '';
+                                                                                                }
+                                                                                            });;
+}
+
 module.exports = {
         initView: initView,
         loadListsTags: loadListsTags,
         loadListTagsActive: loadListTagsActive,
         loadListMenuTags: loadListMenuTags,
-        deletetagFromMenuList: deletetagFromMenuList,
 }

@@ -173,3 +173,10 @@
   background-color: inherit;
   padding: inherit;
   color: inherit; }
+
+.tagProject input {
+  border: none;
+  border-bottom: 1px solid #dddddd;
+  height: 30px;
+  outline: none;
+  color: black; }
