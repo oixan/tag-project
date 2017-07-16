@@ -8,10 +8,17 @@
   display: inline-block;
   padding: 3px 5px;
   margin-right: 8px;
+  margin-top: 6px;
   background: whitesmoke; }
+
+.tagProject ul li:hover {
+  cursor: pointer; }
 
 .tagProject ul .tagProjectButtonAdd {
   background: inherit; }
+
+.tagProject ul .tagProjectButtonAdd:hover {
+  cursor: initial; }
 
 .tagProject ul .tagProjectButtonAdd button {
   color: #333;
@@ -32,7 +39,8 @@
   padding: 10px;
   background-color: white;
   border: 1px solid #dddddd;
-  display: none; }
+  display: none;
+  overflow: auto; }
 
 .tagProject .tagProjectButtonAdd .tagProjectDropdown:before {
   position: absolute;

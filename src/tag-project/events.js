@@ -6,6 +6,7 @@ var initEvents = function( parent ){
     openCloseDropdownEvent( parent );
     closeTagMenuListEvent( parent );
     closeTagListEvent( parent );
+    addTagListActiveEvent( parent );
 }
  
 // private function 
@@ -48,16 +49,41 @@ function closeTagListEvent( parent ){
     $( parent ).children().first().children().map(
         function (pos, el){
             if ( pos + 1 != $( parent ).children().first().children().length){
+                var newTagMenu = $(el).clone().first();
                 var closeButton = $(el).find('.fa')[0];
                 $( closeButton ).click(function(e) {
+                    // Remove tag on click 
                     var tagInList = e.target.parentElement;
                     view.deletetagFromMenuList( tagInList );
+
+                    // Add tag from active list from menu list
+                    var listMenuTags = $( parent ).find('.tagProjectDropdown')[0];
+                    $( listMenuTags ).append( newTagMenu );
+                    closeTagMenuListEvent( parent );
+                    addTagListActiveEvent( parent );
                     e.stopPropagation();
                 });
+                
             }
         }
     );
 }  
+
+function addTagListActiveEvent( parent ){
+    var buttonAddTag = $( parent ).find('.tagProjectButtonAdd')[0];
+    $( parent ).find('.tagProjectDropdown li').map(
+         function (pos, el){
+            $( el ).click(function(e) {
+                var newTagActive = $(el).clone().first();
+                $(newTagActive).insertBefore(buttonAddTag);
+                view.deletetagFromMenuList( el );
+
+                closeTagListEvent( parent );
+                e.stopPropagation();
+            });
+        }
+    );
+}
 
 module.exports = {
             initEvents: initEvents
