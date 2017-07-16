@@ -2476,7 +2476,7 @@ var initListTagsActive = function initListTagsActive(listTagsActive, parent) {
 
 var initListMenuTags = function initListMenuTags(listTagMenu, parent) {
     if (listTagMenu) {
-        view.loadListMenuTags(parent, listTagMenu['listTagMenu']);
+        view.loadListMenuTags(parent, listTagMenu['listMenuTags']);
     }
 };
 
@@ -2509,8 +2509,8 @@ var loadListsTags = function loadListsTags(parent, listTagsActive, listMenuTags)
 
 var loadListTagsActive = function loadListTagsActive(parent, listTags) {
     if (!listTags) return;
-    var ul;
-    if (!(ul = $(parent).find('ul')[0])) ul = addUlList();
+    var ulLastElement;
+    if (!(ulLastElement = $(parent).find('ul .tagProjectButtonAdd')[0])) ulLastElement = addUlList();
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -2520,7 +2520,7 @@ var loadListTagsActive = function loadListTagsActive(parent, listTags) {
         for (var _iterator = listTags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var tag = _step.value;
 
-            ul.append("<li " + (tag.colorBackground ? " style=background-color:'" + tag.colorBackground + "'" : '') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+            $("<li " + (tag.colorBackground ? " style=background-color:'" + tag.colorBackground + "'" : '') + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
         }
     } catch (err) {
         _didIteratorError = true;
@@ -2540,7 +2540,8 @@ var loadListTagsActive = function loadListTagsActive(parent, listTags) {
 
 var loadListMenuTags = function loadListMenuTags(parent, listTags) {
     if (!listTags) return;
-    if (dropdown = $(parent).find('tagProjectDropdown')[0]) {
+    var dropdown;
+    if (dropdown = $(parent).find('.tagProjectDropdown')[0]) {
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
         var _iteratorError2 = undefined;
@@ -2576,7 +2577,8 @@ function addUlList(parent) {
 
 function addTagButton(parent) {
     // Add the button tag 
-    $(parent).append($("<li class='tagProjectButtonAdd'>").append($("<button class='tagProjectButton'>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
+    var ul = $(parent).find("ul")[0];
+    $(ul).append($("<li class='tagProjectButtonAdd'>").append($("<button class='tagProjectButton'>").append($("<span>").append($("<i class='fa fa-tag' aria-hidden='true'></i>")))));
 }
 
 function addMenuTag(parent) {

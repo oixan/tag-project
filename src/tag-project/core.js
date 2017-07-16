@@ -20,7 +20,7 @@ let initListTagsActive = function (listTagsActive, parent){
 
 let initListMenuTags = function (listTagMenu, parent){
     if ( listTagMenu ){
-        view.loadListMenuTags(parent, listTagMenu['listTagMenu']);
+        view.loadListMenuTags(parent, listTagMenu['listMenuTags']);
     }
     
 }

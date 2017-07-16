@@ -10,7 +10,15 @@ var listTag = {
                     ]
 }
 
+var listTagMenu = {
+    'listMenuTags': [
+                        { value: "primo tag" },
+                        { value: "secondo tag" },
+                        { value: "pingu tag" }
+                    ]
+}
+
 $("#tag1").map( function ( pos, el){
-    tagProject.init( listTag, null ,el);
+    tagProject.init( listTag, listTagMenu ,el);
 });
 
