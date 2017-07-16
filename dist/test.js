@@ -2444,10 +2444,12 @@ module.exports = __webpack_amd_options__;
 
 var $ = __webpack_require__(0);
 
+// publiic function 
 var initEvents = function initEvents(parent) {
     openCloseDropdownEvent(parent);
 };
 
+// private function 
 function openCloseDropdownEvent(parent) {
 
     // open event dropdown tag
@@ -2641,6 +2643,10 @@ var listTagMenu = {
 };
 
 $("#tag1").map(function (pos, el) {
+    tagProject.init(listTag, listTagMenu, el);
+});
+
+$("#tag2").map(function (pos, el) {
     tagProject.init(listTag, listTagMenu, el);
 });
 
