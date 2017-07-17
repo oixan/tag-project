@@ -88,14 +88,14 @@ function addTagInputMenuTag( parent ){
 }
 
 function addTagEditDropdown( parent ){
-    $(parent).children().first().append("<div class='tagProjectEditTagDropdown active'>").find(".tagProjectEditTagDropdown")
+    $(parent).children().first().append("<div class='tagProjectEditTagDropdown'>").find(".tagProjectEditTagDropdown")
                                 .append("<div class='tagProjectTitle'>")
                                 .append("<div class='tagProjectContent'>");
     addContentTagEditDropdown( parent );
 }
 
 function addContentTagEditDropdown( parent ){   
-    $(parent).find('.tagProjectContent').append("<input placeholder='Edit Tag'>")
+    $(parent).find('.tagProjectContent').append("<input class='tagProjectEditInput' placeholder='Edit Tag'>")
                                         .append("<ul>");
     var ul = $(parent).find('.tagProjectContent ul');    
     for( var color of colors.listColors){

@@ -2381,6 +2381,7 @@ var addSingleTagListActiveEvent = function addSingleTagListActiveEvent(parent, t
         deletetagFromMenuList(e.currentTarget);
 
         closeSingleTagListEvent(parent, newTagActive);
+        editSingleTagEditDropdownEvent(newTagActive);
         $(document).trigger("click");
         e.stopPropagation();
     });
@@ -2395,11 +2396,12 @@ var closeSingleTagMenuEvent = function closeSingleTagMenuEvent(tag) {
 };
 
 var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag) {
-    var newTagMenu = $(tag).clone().first();
+
     var closeButton = $(tag).find('.fa')[0];
     $(closeButton).click(function (e) {
         // Remove tag on click 
         var tagInList = e.target.parentElement;
+        var newTagMenu = $(tagInList).clone().first();
         deletetagFromMenuList(tagInList);
 
         // Add tag from active list from menu list
@@ -2407,6 +2409,23 @@ var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag) {
         $(listMenuTags).append(newTagMenu);
         closeSingleTagMenuEvent(newTagMenu);
         addSingleTagListActiveEvent(parent, newTagMenu);
+        $(document).trigger('click');
+        e.stopPropagation();
+    });
+};
+
+var editSingleTagEditDropdownEvent = function editSingleTagEditDropdownEvent(tag) {
+    $(tag).click(function (e) {
+        var position = $(e.currentTarget).position();
+        var menuListActive = e.currentTarget.parentElement;
+        $(menuListActive).children().map(function (pos, el) {
+            if (pos + 1 < $(menuListActive).children().length - 1) {
+                $(el).removeClass('selected');
+            }
+        });
+        $(menuListActive).find('.tagProjectEditInput').val($(e.currentTarget).text());
+        $(e.currentTarget).addClass('selected');
+        $(menuListActive).find('.tagProjectEditTagDropdown').first().addClass('active').css({ "left": position.left + 'px', "top": position.top + 30 + "px" });
         e.stopPropagation();
     });
 };
@@ -2420,7 +2439,8 @@ module.exports = {
     addSingleTagListActiveEvent: addSingleTagListActiveEvent,
     deletetagFromMenuList: deletetagFromMenuList,
     closeSingleTagListEvent: closeSingleTagListEvent,
-    closeSingleTagMenuEvent: closeSingleTagMenuEvent
+    closeSingleTagMenuEvent: closeSingleTagMenuEvent,
+    editSingleTagEditDropdownEvent: editSingleTagEditDropdownEvent
 };
 
 /***/ }),
@@ -2522,6 +2542,9 @@ var initEvents = function initEvents(parent) {
     closeTagsMenuListEvent(parent);
     closeTagsListEvent(parent);
     addTagsListActiveEvent(parent);
+    editTagsDropdownEvent(parent);
+    closeEditDropdownEvent(parent);
+    updateValueTagEvent(parent);
 };
 
 // private function 
@@ -2547,6 +2570,20 @@ function openCloseDropdownEvent(parent) {
     });
 }
 
+function closeEditDropdownEvent(parent) {
+
+    // close event dropdown tag
+    $(document).click(function (e) {
+        e.stopPropagation();
+        var editDropdown = $(parent).find('.tagProjectEditTagDropdown');
+
+        //check if the clicked area is dropdown or not
+        if ($(editDropdown).has(e.target).length === 0) {
+            $(editDropdown).removeClass('active');
+        }
+    });
+}
+
 function closeTagsMenuListEvent(parent) {
     $(parent).find('.tagProjectDropdown li').map(function (pos, el) {
         viewEvent.closeSingleTagMenuEvent(el);
@@ -2564,6 +2601,24 @@ function closeTagsListEvent(parent) {
 function addTagsListActiveEvent(parent) {
     $(parent).find('.tagProjectDropdown li').map(function (pos, el) {
         viewEvent.addSingleTagListActiveEvent(parent, el);
+    });
+}
+
+function editTagsDropdownEvent(parent) {
+    $(parent).children().first().children().map(function (pos, el) {
+        if (pos + 1 < $(parent).children().first().children().length - 1) {
+            viewEvent.editSingleTagEditDropdownEvent(el);
+        }
+    });
+}
+
+function updateValueTagEvent(parent) {
+    $(parent).find('.tagProjectEditInput').keyup(function (e) {
+        if (e.keyCode == 13) {
+            //$(parent).find('.selected').first().text( e.target.value );
+            $(parent).find('.selected')[0].childNodes[0].nodeValue = e.target.value;
+            $(document).trigger("click");
+        }
     });
 }
 
@@ -2736,12 +2791,12 @@ function addTagInputMenuTag(parent) {
 }
 
 function addTagEditDropdown(parent) {
-    $(parent).children().first().append("<div class='tagProjectEditTagDropdown active'>").find(".tagProjectEditTagDropdown").append("<div class='tagProjectTitle'>").append("<div class='tagProjectContent'>");
+    $(parent).children().first().append("<div class='tagProjectEditTagDropdown'>").find(".tagProjectEditTagDropdown").append("<div class='tagProjectTitle'>").append("<div class='tagProjectContent'>");
     addContentTagEditDropdown(parent);
 }
 
 function addContentTagEditDropdown(parent) {
-    $(parent).find('.tagProjectContent').append("<input placeholder='Edit Tag'>").append("<ul>");
+    $(parent).find('.tagProjectContent').append("<input class='tagProjectEditInput' placeholder='Edit Tag'>").append("<ul>");
     var ul = $(parent).find('.tagProjectContent ul');
     var _iteratorNormalCompletion3 = true;
     var _didIteratorError3 = false;

@@ -196,3 +196,6 @@
   height: 30px;
   outline: none;
   color: black; }
+
+.tagProject .tagProjectEditInput {
+  padding-left: 10px; }

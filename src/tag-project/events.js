@@ -8,6 +8,9 @@ var initEvents = function( parent ){
     closeTagsMenuListEvent( parent );
     closeTagsListEvent( parent );
     addTagsListActiveEvent( parent );
+    editTagsDropdownEvent( parent );
+    closeEditDropdownEvent( parent );
+    updateValueTagEvent( parent );
 }
  
 // private function 
@@ -29,6 +32,21 @@ function openCloseDropdownEvent( parent ){
         //check if the clicked area is dropdown or not
         if ( $(dropdown).has(e.target).length === 0 ) {
             $(dropdown).removeClass('active');
+        }
+    })
+
+}
+
+function closeEditDropdownEvent( parent ){
+
+    // close event dropdown tag
+    $(document).click(function (e) {
+        e.stopPropagation();
+        var editDropdown = $( parent ).find('.tagProjectEditTagDropdown');
+
+        //check if the clicked area is dropdown or not
+        if ( $(editDropdown).has(e.target).length === 0 ) {
+            $(editDropdown).removeClass('active');
         }
     })
 
@@ -60,6 +78,26 @@ function addTagsListActiveEvent( parent ){
     );
 }
 
+function editTagsDropdownEvent( parent ){
+    $(parent).children().first().children().map(
+        function(pos, el){
+            if ( pos + 1 < $( parent ).children().first().children().length - 1){
+                viewEvent.editSingleTagEditDropdownEvent( el );
+            }
+        }
+    );
+}
+
+function updateValueTagEvent( parent ){
+    $( parent ).find('.tagProjectEditInput').keyup(function(e){
+        if(e.keyCode == 13)
+        {   
+            //$(parent).find('.selected').first().text( e.target.value );
+            $(parent).find('.selected')[0].childNodes[0].nodeValue =  e.target.value;
+            $(document).trigger( "click" );
+        }
+    });
+}
 
 module.exports = {
             initEvents: initEvents,

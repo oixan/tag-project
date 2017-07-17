@@ -16,7 +16,7 @@ var addTagMenuList = function  addTagMenuList( parent, tag ){
 }
 
 // single element event
-var addSingleTagListActiveEvent = function addSingleTagListActiveEvent( parent, tag){
+var addSingleTagListActiveEvent = function ( parent, tag){
     var buttonAddTag = $( parent ).find('.tagProjectButtonAdd')[0];
     $( tag ).click(function(e) {
         var newTagActive = $(e.currentTarget).clone().first();
@@ -24,13 +24,14 @@ var addSingleTagListActiveEvent = function addSingleTagListActiveEvent( parent, 
         deletetagFromMenuList( e.currentTarget );
 
         closeSingleTagListEvent( parent, newTagActive );
+        editSingleTagEditDropdownEvent( newTagActive );
         $(document).trigger("click");
         e.stopPropagation();
                 
     });
 }
 
-var closeSingleTagMenuEvent = function closeSingleTagMenuEvent( tag ){
+var closeSingleTagMenuEvent = function ( tag ){
     $( tag ).find('.fa').click(
         function (e){
             var tagInMenuList = e.target.parentElement;
@@ -40,12 +41,13 @@ var closeSingleTagMenuEvent = function closeSingleTagMenuEvent( tag ){
     );
 }
 
-var closeSingleTagListEvent = function closeSingleTagListEvent( parent, tag ){
-    var newTagMenu = $(tag).clone().first();
+var closeSingleTagListEvent = function ( parent, tag ){
+    
     var closeButton = $(tag).find('.fa')[0];
     $( closeButton ).click(function(e) {
         // Remove tag on click 
         var tagInList = e.target.parentElement;
+        var newTagMenu = $(tagInList).clone().first();
         deletetagFromMenuList( tagInList );
 
         // Add tag from active list from menu list
@@ -53,10 +55,31 @@ var closeSingleTagListEvent = function closeSingleTagListEvent( parent, tag ){
         $( listMenuTags ).append( newTagMenu );
         closeSingleTagMenuEvent( newTagMenu );
         addSingleTagListActiveEvent( parent, newTagMenu );
+        $(document).trigger( 'click' );
         e.stopPropagation();
     });
 }
 
+var editSingleTagEditDropdownEvent = function ( tag ){
+    $(tag).click( 
+        function(e) {
+            var position = $(e.currentTarget).position();
+            var menuListActive = e.currentTarget.parentElement;
+            $(menuListActive).children().map(
+                function (pos, el){
+                    if ( pos + 1 < $( menuListActive ).children().length - 1){
+                        $(el).removeClass('selected');
+                    }
+                }
+            );
+            $(menuListActive).find('.tagProjectEditInput').val( $( e.currentTarget).text() );
+            $(e.currentTarget).addClass('selected');
+            $(menuListActive).find('.tagProjectEditTagDropdown').first().addClass('active')
+                                                                        .css({"left": position.left + 'px' , "top": position.top + 30 + "px"});
+            e.stopPropagation();
+        }
+    );
+}
 
 var deletetagFromMenuList = function( element ){
     $(element).remove();
@@ -69,4 +92,5 @@ module.exports = {
         deletetagFromMenuList: deletetagFromMenuList,
         closeSingleTagListEvent: closeSingleTagListEvent,
         closeSingleTagMenuEvent: closeSingleTagMenuEvent,
+        editSingleTagEditDropdownEvent: editSingleTagEditDropdownEvent,
 }
