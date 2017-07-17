@@ -2627,6 +2627,7 @@ function changeColorTagEvent(parent) {
     $(parent).find('.tagProjectContent li').map(function (pos, el) {
         $(el).click(function (e) {
             $(parent).find('.selected').removeAttr('style').attr('class', $(e.currentTarget).attr("class") + ' selected');
+            $(document).trigger("click");
         });
     });
 }

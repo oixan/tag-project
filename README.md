@@ -33,6 +33,19 @@ npm run build
 Open the index.html page in dist folder.
 
 ## History
+- 0.6.0 ( new features - long term )
+  - infinity autoscroll on menu lists tag
+  - autocomplete when insert a tag.
+- 0.5.0 ( new features )
+  - saving id on data-tagId attribute on every li element.
+- 0.4.0 ( new features )
+  - fire event on tag color change.
+  - fire event on insert new tag.
+  - fire event on delete tag.
+  - fire event on delete active tag.
+  - fire event on edit active tag name.
+- 0.3.0 
+  -  Close the dropdown after a colo is picked.
 - 0.3.0 
   -  Added Edit Name tag.
   -  Added dropdawn to change color of tag.

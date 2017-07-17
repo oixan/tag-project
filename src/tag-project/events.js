@@ -106,6 +106,7 @@ function changeColorTagEvent( parent ){
             $(el).click(
                 function (e){
                     $(parent).find('.selected').removeAttr( 'style' ).attr('class', $(e.currentTarget).attr("class") + ' selected' );
+                    $(document).trigger("click");
                 }
             );
         }
