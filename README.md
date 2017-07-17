@@ -33,10 +33,13 @@ npm run build
 Open the index.html page in dist folder.
 
 ## History
+- 0.3.0 
+  -  Added Edit Name tag.
+  -  Added dropdawn to change color of tag.
 - 0.2.0 
-  -  #11: Is now possible Add new Tag in the Menu Tags Dropdown.
+  -  Is now possible Add new Tag in the Menu Tags Dropdown.
 - 0.1.7
-  -  #10: possibility to choose default color based on colorBackgoudnLabel.css.
+  -  #1: possibility to choose default color based on colorBackgoudnLabel.css.
 
 ## License
 This project is licensed under [MIT](https://github.com/oixan/tag-project/blob/master/LICENSE "Read more about the MIT license").
