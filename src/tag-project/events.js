@@ -11,6 +11,7 @@ var initEvents = function( parent ){
     editTagsDropdownEvent( parent );
     closeEditDropdownEvent( parent );
     updateValueTagEvent( parent );
+    changeColorTagEvent( parent );
 }
  
 // private function 
@@ -97,6 +98,18 @@ function updateValueTagEvent( parent ){
             $(document).trigger( "click" );
         }
     });
+}
+
+function changeColorTagEvent( parent ){
+    $(parent).find('.tagProjectContent li').map(
+        function(pos, el){
+            $(el).click(
+                function (e){
+                    $(parent).find('.selected').removeAttr( 'style' ).attr('class', $(e.currentTarget).attr("class") + ' selected' );
+                }
+            );
+        }
+    );
 }
 
 module.exports = {
