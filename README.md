@@ -44,8 +44,8 @@ Open the index.html page in dist folder.
   - fire event on delete tag.
   - fire event on delete active tag.
   - fire event on edit active tag name.
-- 0.3.0 
-  -  Close the dropdown after a colo is picked.
+- 0.3.1 
+  -  Close the dropdown after a color is picked.
 - 0.3.0 
   -  Added Edit Name tag.
   -  Added dropdawn to change color of tag.
