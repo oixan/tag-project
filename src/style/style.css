@@ -6,6 +6,7 @@
 
 .tagProject ul{
     list-style-type: none;
+    position: relative;
 }
 
 .tagProject ul li{
@@ -40,7 +41,7 @@
     background-color: #e6e6e6;
 }
 
-.tagProject .tagProjectButtonAdd .tagProjectDropdown{
+.tagProject .tagProjectButtonAdd .tagProjectDropdown, .tagProject .tagProjectEditTagDropdown{
     position: absolute;
     width: auto;
     min-width: 150px;
@@ -54,7 +55,26 @@
     overflow: auto;
 }
 
-.tagProject .tagProjectButtonAdd .tagProjectDropdown:before{
+.tagProject .tagProjectEditTagDropdown{
+    overflow: initial;
+}
+
+.tagProject .tagProjectEditTagDropdown ul{
+    max-width: 173px;
+    padding: 10px;
+}
+
+.tagProject .tagProjectEditTagDropdown li{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.tagProject .tagProjectEditTagDropdown li:hover{
+    border: 2px solid rgba(0, 0, 0, 0.27);
+}
+
+.tagProject .tagProjectButtonAdd .tagProjectDropdown:before,.tagProject .tagProjectEditTagDropdown:before {
     position: absolute;
     top: -8px;
     left: 9px;
@@ -66,7 +86,7 @@
     content: '';
 }
 
-.tagProject .tagProjectButtonAdd .tagProjectDropdown:after{
+.tagProject .tagProjectButtonAdd .tagProjectDropdown:after, .tagProject .tagProjectEditTagDropdown:after {
     position: absolute;
     top: -7px;
     left: 10px;
@@ -78,7 +98,7 @@
     content: '';
 }
 
-.tagProject .tagProjectButtonAdd .tagProjectDropdown.active{
+.tagProject .active, .tagProject .tagProjectButtonAdd .active{
     display: block;
 }
 

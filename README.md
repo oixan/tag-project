@@ -4,8 +4,7 @@ Tag-project is a jQuery plugin providing a unusual tag picker.
 Current stable version (none) : **v0.2.0** in development.
 
 ## Features
-* no require bootstrap
-* other :)
+* :)
 
 ## Usage
 import the library 

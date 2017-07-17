@@ -45,7 +45,7 @@ function closeTagsMenuListEvent( parent ){
 function closeTagsListEvent( parent ){
     $( parent ).children().first().children().map(
         function (pos, el){
-            if ( pos + 1 != $( parent ).children().first().children().length){
+            if ( pos + 1 < $( parent ).children().first().children().length - 1){
                 viewEvent.closeSingleTagListEvent(parent, el);
             }
         }

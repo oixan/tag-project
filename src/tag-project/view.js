@@ -1,6 +1,7 @@
 var $ = require('../../node_modules/jquery/dist/jquery.min');
 
 var viewEvent = require('./viewEvent');
+var colors = require('./color');
 
 // public function
 var initView = function(parent, listTagsActive, listMenuTags){
@@ -8,6 +9,7 @@ var initView = function(parent, listTagsActive, listMenuTags){
     addTagButton(parent);
     addMenuTag(parent);
     addTagInputMenuTag(parent);
+    addTagEditDropdown(parent);
     loadListsTags(parent, listTagsActive, listMenuTags)
 }
 
@@ -83,6 +85,22 @@ function addTagInputMenuTag( parent ){
                                                                                                     e.target.value = '';
                                                                                                 }
                                                                                             });;
+}
+
+function addTagEditDropdown( parent ){
+    $(parent).children().first().append("<div class='tagProjectEditTagDropdown active'>").find(".tagProjectEditTagDropdown")
+                                .append("<div class='tagProjectTitle'>")
+                                .append("<div class='tagProjectContent'>");
+    addContentTagEditDropdown( parent );
+}
+
+function addContentTagEditDropdown( parent ){   
+    $(parent).find('.tagProjectContent').append("<input placeholder='Edit Tag'>")
+                                        .append("<ul>");
+    var ul = $(parent).find('.tagProjectContent ul');    
+    for( var color of colors.listColors){
+        $(ul).append("<li class='" + color + "'>")
+    }                          
 }
 
 module.exports = {

@@ -2555,7 +2555,7 @@ function closeTagsMenuListEvent(parent) {
 
 function closeTagsListEvent(parent) {
     $(parent).children().first().children().map(function (pos, el) {
-        if (pos + 1 != $(parent).children().first().children().length) {
+        if (pos + 1 < $(parent).children().first().children().length - 1) {
             viewEvent.closeSingleTagListEvent(parent, el);
         }
     });
@@ -2624,6 +2624,7 @@ module.exports = {
 var $ = __webpack_require__(0);
 
 var viewEvent = __webpack_require__(1);
+var colors = __webpack_require__(10);
 
 // public function
 var initView = function initView(parent, listTagsActive, listMenuTags) {
@@ -2631,6 +2632,7 @@ var initView = function initView(parent, listTagsActive, listMenuTags) {
     addTagButton(parent);
     addMenuTag(parent);
     addTagInputMenuTag(parent);
+    addTagEditDropdown(parent);
     loadListsTags(parent, listTagsActive, listMenuTags);
 };
 
@@ -2733,11 +2735,58 @@ function addTagInputMenuTag(parent) {
     });;
 }
 
+function addTagEditDropdown(parent) {
+    $(parent).children().first().append("<div class='tagProjectEditTagDropdown active'>").find(".tagProjectEditTagDropdown").append("<div class='tagProjectTitle'>").append("<div class='tagProjectContent'>");
+    addContentTagEditDropdown(parent);
+}
+
+function addContentTagEditDropdown(parent) {
+    $(parent).find('.tagProjectContent').append("<input placeholder='Edit Tag'>").append("<ul>");
+    var ul = $(parent).find('.tagProjectContent ul');
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+        for (var _iterator3 = colors.listColors[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var color = _step3.value;
+
+            $(ul).append("<li class='" + color + "'>");
+        }
+    } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+            }
+        } finally {
+            if (_didIteratorError3) {
+                throw _iteratorError3;
+            }
+        }
+    }
+}
+
 module.exports = {
     initView: initView,
     loadListsTags: loadListsTags,
     loadListTagsActive: loadListTagsActive,
     loadListMenuTags: loadListMenuTags
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var listColors = ['label-red', 'label-pink', 'label-purple', 'label-deeppurple', 'label-indigo', 'label-blue', 'label-lightblue', 'label-cyan', 'label-teal', 'label-green', 'label-lightgreen', 'label-lime', 'label-yellow', 'label-amber', 'label-orange', 'label-deeporange', 'label-brown', 'label-grey', 'label-bluegrey'];
+
+module.exports = {
+    listColors: listColors
 };
 
 /***/ })
