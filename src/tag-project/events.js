@@ -9,7 +9,7 @@ var initEvents = function( parent, eventsUser ){
     closeTagsListEvent( parent, eventsUser );
     addTagsListActiveEvent( parent, eventsUser );
     editTagsDropdownEvent( parent );
-    closeEditDropdownEvent( parent );
+    closeEditDropdownEvent( parent ); 
     updateValueTagEvent( parent, eventsUser );
     changeColorTagEvent( parent, eventsUser );
     addInputTagKeyEvent( parent, eventsUser );
