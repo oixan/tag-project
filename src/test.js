@@ -19,16 +19,18 @@ var listTagMenu = {
 }
 
 var test = function ( dataItem ){
-    alert('Test: ' + dataItem['value']);
+    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] );
 }
 
+/* Remove the content to see the events fired in action
 var tagProjectEvent = {
-    // addTagActiveListEvent: test, // FATTO
+    addTagActiveListEvent: test, 
     deleteTagActiveListEvent: test,
     editTagActiveListEvent: test,
     addTagMenuListEvent: test,
     deleteTagMenuListEvent: test,
 }
+*/
 
 $("#tag1").map( function ( pos, el ){
     tagProject.init( listTag, listTagMenu, el, { events : tagProjectEvent } );

@@ -1,7 +1,7 @@
 # Tag-project  - based on Jquery -
 Tag-project is a jQuery plugin providing a unusual tag picker.
 
-Current stable version (none) : **v0.3.1** in development.
+Current stable version (none) : **v0.4.0** in development.
 
 ## Features
 * :)
@@ -38,7 +38,7 @@ Open the index.html page in dist folder.
   - autocomplete when insert a tag.
 - 0.5.0 ( new features )
   - saving id on data-tagId attribute on every li element.
-- 0.4.0 ( new features )
+- 0.4.0 
   - fire event on tag color change.
   - fire event on insert new tag.
   - fire event on delete tag.

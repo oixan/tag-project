@@ -99,7 +99,7 @@ function updateValueTagEvent( parent, eventsUser ){
             $(document).trigger( "click" );
             setTimeout( x => {
             if ( eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent )
-                eventsUser.events.editTagActiveListEvent({value: 'editTagActiveListEvent'});
+                eventsUser.events.editTagActiveListEvent( viewEvent.tagToObject( $(parent).find('.selected')[0] )  );
             }, 200);
         }
     });
@@ -114,7 +114,7 @@ function changeColorTagEvent( parent, eventsUser ){
                     $(document).trigger("click");
                     setTimeout( x => {
                     if ( eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent )
-                        eventsUser.events.editTagActiveListEvent({value: 'editTagActiveListEvent'});
+                        eventsUser.events.editTagActiveListEvent( viewEvent.tagToObject( $(parent).find('.selected')[0] ) );
                     }, 200);
                 }
             );

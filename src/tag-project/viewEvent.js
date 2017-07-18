@@ -11,11 +11,12 @@ var addTagMenuList = function  addTagMenuList( parent, tag, eventsUser ){
     
     $(dropdown).first().first().children().first().after("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "' >"
                                                                 + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-    addSingleTagListActiveEvent( parent, $(dropdown).first().first().children().get(1), eventsUser );        
-    closeSingleTagMenuEvent( $(dropdown).first().first().children().get(1), eventsUser );   
+    var newTagActive = $(dropdown).first().first().children().get(1);
+    addSingleTagListActiveEvent( parent, newTagActive, eventsUser );        
+    closeSingleTagMenuEvent( newTagActive, eventsUser );   
     setTimeout( x => {
         if ( eventsUser && eventsUser.events && eventsUser.events.addTagMenuListEvent )
-            eventsUser.events.addTagMenuListEvent({value: 'addTagMenuListEvent'});
+            eventsUser.events.addTagMenuListEvent( tagToObject(newTagActive) );
     }, 200);                                      
 }
 
@@ -32,7 +33,7 @@ var addSingleTagListActiveEvent = function ( parent, tag, eventsUser){
         $(document).trigger("click");
         setTimeout( x => {
             if ( eventsUser && eventsUser.events && eventsUser.events.addTagActiveListEvent )
-                eventsUser.events.addTagActiveListEvent({value: 'addTagActiveListEvent'});
+                eventsUser.events.addTagActiveListEvent( tagToObject(newTagActive) );
         }, 200);
         e.stopPropagation();
                 
@@ -46,7 +47,7 @@ var closeSingleTagMenuEvent = function ( tag, eventsUser ){
             deletetagFromMenuList( tagInMenuList );
             setTimeout( x => {
                 if ( eventsUser && eventsUser.events && eventsUser.events.deleteTagMenuListEvent )
-                    eventsUser.events.deleteTagMenuListEvent({value: 'deleteTagMenuListEvent'});
+                    eventsUser.events.deleteTagMenuListEvent( tagToObject(tag) );
             }, 200);            
             e.stopPropagation();
         }
@@ -70,7 +71,7 @@ var closeSingleTagListEvent = function ( parent, tag, eventsUser ){
         $(document).trigger( 'click' );
         setTimeout( x => {
             if ( eventsUser && eventsUser.events && eventsUser.events.deleteTagActiveListEvent )
-                eventsUser.events.deleteTagActiveListEvent({value: 'deleteTagActiveListEvent'});
+                eventsUser.events.deleteTagActiveListEvent( tagToObject(newTagMenu) );
         }, 200);
         e.stopPropagation();
     });
@@ -101,6 +102,27 @@ var deletetagFromMenuList = function( element ){
     $(element).remove();
 }
 
+function tagToObject( tag ){
+    var value
+    if ( tag[0] )
+        value = tag[0].childNodes[0].nodeValue;
+    else   
+        value = tag.childNodes[0].nodeValue;
+    var colorBackground = ( $(tag).attr('style')?rgb2hex($(tag).attr('style')): '' );
+    colorBackground = colorBackground.replace('background-color:','');
+    var backgroundCSS = $(tag).attr('class');
+    backgroundCSS = backgroundCSS.replace('selected','');
+
+    return { value: value, colorBackground: colorBackground, backgroundCSS: backgroundCSS };
+}
+
+function rgb2hex(orig){
+    var rgb = orig.replace(/\s/g,'').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+    return (rgb && rgb.length === 4) ? "#" +
+    ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+    ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+    ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : orig;
+}
 
 module.exports = {
         addTagMenuList: addTagMenuList,
@@ -109,4 +131,5 @@ module.exports = {
         closeSingleTagListEvent: closeSingleTagListEvent,
         closeSingleTagMenuEvent: closeSingleTagMenuEvent,
         editSingleTagEditDropdownEvent: editSingleTagEditDropdownEvent,
+        tagToObject: tagToObject,
 }

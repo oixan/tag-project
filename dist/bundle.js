@@ -2368,10 +2368,11 @@ var addTagMenuList = function addTagMenuList(parent, tag, eventsUser) {
     if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
 
     $(dropdown).first().first().children().first().after("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-    addSingleTagListActiveEvent(parent, $(dropdown).first().first().children().get(1), eventsUser);
-    closeSingleTagMenuEvent($(dropdown).first().first().children().get(1), eventsUser);
+    var newTagActive = $(dropdown).first().first().children().get(1);
+    addSingleTagListActiveEvent(parent, newTagActive, eventsUser);
+    closeSingleTagMenuEvent(newTagActive, eventsUser);
     setTimeout(function (x) {
-        if (eventsUser && eventsUser.events && eventsUser.events.addTagMenuListEvent) eventsUser.events.addTagMenuListEvent({ value: 'addTagMenuListEvent' });
+        if (eventsUser && eventsUser.events && eventsUser.events.addTagMenuListEvent) eventsUser.events.addTagMenuListEvent(tagToObject(newTagActive));
     }, 200);
 };
 
@@ -2387,7 +2388,7 @@ var addSingleTagListActiveEvent = function addSingleTagListActiveEvent(parent, t
         editSingleTagEditDropdownEvent(newTagActive);
         $(document).trigger("click");
         setTimeout(function (x) {
-            if (eventsUser && eventsUser.events && eventsUser.events.addTagActiveListEvent) eventsUser.events.addTagActiveListEvent({ value: 'addTagActiveListEvent' });
+            if (eventsUser && eventsUser.events && eventsUser.events.addTagActiveListEvent) eventsUser.events.addTagActiveListEvent(tagToObject(newTagActive));
         }, 200);
         e.stopPropagation();
     });
@@ -2398,7 +2399,7 @@ var closeSingleTagMenuEvent = function closeSingleTagMenuEvent(tag, eventsUser) 
         var tagInMenuList = e.target.parentElement;
         deletetagFromMenuList(tagInMenuList);
         setTimeout(function (x) {
-            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagMenuListEvent) eventsUser.events.deleteTagMenuListEvent({ value: 'deleteTagMenuListEvent' });
+            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagMenuListEvent) eventsUser.events.deleteTagMenuListEvent(tagToObject(tag));
         }, 200);
         e.stopPropagation();
     });
@@ -2420,7 +2421,7 @@ var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag, even
         addSingleTagListActiveEvent(parent, newTagMenu, eventsUser);
         $(document).trigger('click');
         setTimeout(function (x) {
-            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagActiveListEvent) eventsUser.events.deleteTagActiveListEvent({ value: 'deleteTagActiveListEvent' });
+            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagActiveListEvent) eventsUser.events.deleteTagActiveListEvent(tagToObject(newTagMenu));
         }, 200);
         e.stopPropagation();
     });
@@ -2446,13 +2447,30 @@ var deletetagFromMenuList = function deletetagFromMenuList(element) {
     $(element).remove();
 };
 
+function tagToObject(tag) {
+    var value;
+    if (tag[0]) value = tag[0].childNodes[0].nodeValue;else value = tag.childNodes[0].nodeValue;
+    var colorBackground = $(tag).attr('style') ? rgb2hex($(tag).attr('style')) : '';
+    colorBackground = colorBackground.replace('background-color:', '');
+    var backgroundCSS = $(tag).attr('class');
+    backgroundCSS = backgroundCSS.replace('selected', '');
+
+    return { value: value, colorBackground: colorBackground, backgroundCSS: backgroundCSS };
+}
+
+function rgb2hex(orig) {
+    var rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+    return rgb && rgb.length === 4 ? "#" + ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
+}
+
 module.exports = {
     addTagMenuList: addTagMenuList,
     addSingleTagListActiveEvent: addSingleTagListActiveEvent,
     deletetagFromMenuList: deletetagFromMenuList,
     closeSingleTagListEvent: closeSingleTagListEvent,
     closeSingleTagMenuEvent: closeSingleTagMenuEvent,
-    editSingleTagEditDropdownEvent: editSingleTagEditDropdownEvent
+    editSingleTagEditDropdownEvent: editSingleTagEditDropdownEvent,
+    tagToObject: tagToObject
 };
 
 /***/ }),
@@ -2633,7 +2651,7 @@ function updateValueTagEvent(parent, eventsUser) {
             $(parent).find('.selected')[0].childNodes[0].nodeValue = e.target.value;
             $(document).trigger("click");
             setTimeout(function (x) {
-                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent({ value: 'editTagActiveListEvent' });
+                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent(viewEvent.tagToObject($(parent).find('.selected')[0]));
             }, 200);
         }
     });
@@ -2645,7 +2663,7 @@ function changeColorTagEvent(parent, eventsUser) {
             $(parent).find('.selected').removeAttr('style').attr('class', $(e.currentTarget).attr("class") + ' selected');
             $(document).trigger("click");
             setTimeout(function (x) {
-                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent({ value: 'editTagActiveListEvent' });
+                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent(viewEvent.tagToObject($(parent).find('.selected')[0]));
             }, 200);
         });
     });
