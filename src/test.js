@@ -33,7 +33,7 @@ var tagProjectEvent = {
 */
 
 $("#tag1").map( function ( pos, el ){
-    tagProject.init( listTag, listTagMenu, el, { events : tagProjectEvent } );
+    tagProject.init( listTag, listTagMenu, el /* , { events : tagProjectEvent } */ );
 });
 
 

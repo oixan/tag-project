@@ -38,6 +38,8 @@ Open the index.html page in dist folder.
   - autocomplete when insert a tag.
 - 0.5.0 ( new features )
   - saving id on data-tagId attribute on every li element.
+- 0.4.1 
+  - Fix 
 - 0.4.0 
   - fire event on tag color change.
   - fire event on insert new tag.

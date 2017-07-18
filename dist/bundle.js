@@ -2506,7 +2506,9 @@ var $ = __webpack_require__(0);
 var events = __webpack_require__(7);
 var core = __webpack_require__(8);
 
-function init(listTagsActive, listMenuTags, parent, eventsUser) {
+function init(listTagsActive, listMenuTags, parent) {
+    var eventsUser = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
     core.initLists(listTagsActive, listMenuTags, parent);
     events.initEvents(parent, eventsUser);
 }
