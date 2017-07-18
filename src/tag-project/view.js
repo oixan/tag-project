@@ -79,12 +79,7 @@ function addMenuTag( parent ){
 
 function addTagInputMenuTag( parent ){
     var listMenuTag = $(parent).find('.tagProjectDropdown')[0];
-    $(listMenuTag).prepend('<input>').children().first().prop("placeholder",'Add Tag').keyup(function (e) {
-                                                                                                if (e.keyCode === 13) {
-                                                                                                    viewEvent.addTagMenuList(parent, {value: e.target.value });
-                                                                                                    e.target.value = '';
-                                                                                                }
-                                                                                            });;
+    $(listMenuTag).prepend('<input>').children().first().prop("placeholder",'Add Tag');
 }
 
 function addTagEditDropdown( parent ){

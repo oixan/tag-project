@@ -18,9 +18,22 @@ var listTagMenu = {
                     ]
 }
 
-$("#tag1").map( function ( pos, el){
-    tagProject.init( listTag, listTagMenu ,el);
+var test = function ( dataItem ){
+    alert('Test: ' + dataItem['value']);
+}
+
+var tagProjectEvent = {
+    // addTagActiveListEvent: test, // FATTO
+    deleteTagActiveListEvent: test,
+    editTagActiveListEvent: test,
+    addTagMenuListEvent: test,
+    deleteTagMenuListEvent: test,
+}
+
+$("#tag1").map( function ( pos, el ){
+    tagProject.init( listTag, listTagMenu, el, { events : tagProjectEvent } );
 });
+
 
 
 // tagProject.fn.deleteTagFromMenu( $(".tagProjectDropdown li").first() );

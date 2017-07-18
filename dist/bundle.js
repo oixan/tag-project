@@ -2362,40 +2362,49 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var $ = __webpack_require__(0);
 
-var addTagMenuList = function addTagMenuList(parent, tag) {
+var addTagMenuList = function addTagMenuList(parent, tag, eventsUser) {
     var dropdown = $(parent).find('.tagProjectDropdown')[0];
 
     if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
 
     $(dropdown).first().first().children().first().after("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
-    addSingleTagListActiveEvent(parent, $(dropdown).first().first().children().get(1));
-    closeSingleTagMenuEvent($(dropdown).first().first().children().get(1));
+    addSingleTagListActiveEvent(parent, $(dropdown).first().first().children().get(1), eventsUser);
+    closeSingleTagMenuEvent($(dropdown).first().first().children().get(1), eventsUser);
+    setTimeout(function (x) {
+        if (eventsUser && eventsUser.events && eventsUser.events.addTagMenuListEvent) eventsUser.events.addTagMenuListEvent({ value: 'addTagMenuListEvent' });
+    }, 200);
 };
 
 // single element event
-var addSingleTagListActiveEvent = function addSingleTagListActiveEvent(parent, tag) {
+var addSingleTagListActiveEvent = function addSingleTagListActiveEvent(parent, tag, eventsUser) {
     var buttonAddTag = $(parent).find('.tagProjectButtonAdd')[0];
     $(tag).click(function (e) {
         var newTagActive = $(e.currentTarget).clone().first();
         $(newTagActive).insertBefore(buttonAddTag);
         deletetagFromMenuList(e.currentTarget);
 
-        closeSingleTagListEvent(parent, newTagActive);
+        closeSingleTagListEvent(parent, newTagActive, eventsUser);
         editSingleTagEditDropdownEvent(newTagActive);
         $(document).trigger("click");
+        setTimeout(function (x) {
+            if (eventsUser && eventsUser.events && eventsUser.events.addTagActiveListEvent) eventsUser.events.addTagActiveListEvent({ value: 'addTagActiveListEvent' });
+        }, 200);
         e.stopPropagation();
     });
 };
 
-var closeSingleTagMenuEvent = function closeSingleTagMenuEvent(tag) {
+var closeSingleTagMenuEvent = function closeSingleTagMenuEvent(tag, eventsUser) {
     $(tag).find('.fa').click(function (e) {
         var tagInMenuList = e.target.parentElement;
         deletetagFromMenuList(tagInMenuList);
+        setTimeout(function (x) {
+            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagMenuListEvent) eventsUser.events.deleteTagMenuListEvent({ value: 'deleteTagMenuListEvent' });
+        }, 200);
         e.stopPropagation();
     });
 };
 
-var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag) {
+var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag, eventsUser) {
 
     var closeButton = $(tag).find('.fa')[0];
     $(closeButton).click(function (e) {
@@ -2407,9 +2416,12 @@ var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag) {
         // Add tag from active list from menu list
         var listMenuTags = $(parent).find('.tagProjectDropdown')[0];
         $(listMenuTags).append(newTagMenu);
-        closeSingleTagMenuEvent(newTagMenu);
-        addSingleTagListActiveEvent(parent, newTagMenu);
+        closeSingleTagMenuEvent(newTagMenu, eventsUser);
+        addSingleTagListActiveEvent(parent, newTagMenu, eventsUser);
         $(document).trigger('click');
+        setTimeout(function (x) {
+            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagActiveListEvent) eventsUser.events.deleteTagActiveListEvent({ value: 'deleteTagActiveListEvent' });
+        }, 200);
         e.stopPropagation();
     });
 };
@@ -2476,9 +2488,9 @@ var $ = __webpack_require__(0);
 var events = __webpack_require__(7);
 var core = __webpack_require__(8);
 
-function init(listTagsActive, listMenuTags, parent) {
+function init(listTagsActive, listMenuTags, parent, eventsUser) {
     core.initLists(listTagsActive, listMenuTags, parent);
-    events.initEvents(parent);
+    events.initEvents(parent, eventsUser);
 }
 
 module.exports = {
@@ -2537,15 +2549,16 @@ var $ = __webpack_require__(0);
 var viewEvent = __webpack_require__(1);
 
 // publiic function 
-var initEvents = function initEvents(parent) {
+var initEvents = function initEvents(parent, eventsUser) {
     openCloseDropdownEvent(parent);
-    closeTagsMenuListEvent(parent);
-    closeTagsListEvent(parent);
-    addTagsListActiveEvent(parent);
+    closeTagsMenuListEvent(parent, eventsUser);
+    closeTagsListEvent(parent, eventsUser);
+    addTagsListActiveEvent(parent, eventsUser);
     editTagsDropdownEvent(parent);
     closeEditDropdownEvent(parent);
-    updateValueTagEvent(parent);
-    changeColorTagEvent(parent);
+    updateValueTagEvent(parent, eventsUser);
+    changeColorTagEvent(parent, eventsUser);
+    addInputTagKeyEvent(parent, eventsUser);
 };
 
 // private function 
@@ -2585,23 +2598,23 @@ function closeEditDropdownEvent(parent) {
     });
 }
 
-function closeTagsMenuListEvent(parent) {
+function closeTagsMenuListEvent(parent, eventsUser) {
     $(parent).find('.tagProjectDropdown li').map(function (pos, el) {
-        viewEvent.closeSingleTagMenuEvent(el);
+        viewEvent.closeSingleTagMenuEvent(el, eventsUser);
     });
 }
 
-function closeTagsListEvent(parent) {
+function closeTagsListEvent(parent, eventsUser) {
     $(parent).children().first().children().map(function (pos, el) {
         if (pos + 1 < $(parent).children().first().children().length - 1) {
-            viewEvent.closeSingleTagListEvent(parent, el);
+            viewEvent.closeSingleTagListEvent(parent, el, eventsUser);
         }
     });
 }
 
-function addTagsListActiveEvent(parent) {
+function addTagsListActiveEvent(parent, eventsUser) {
     $(parent).find('.tagProjectDropdown li').map(function (pos, el) {
-        viewEvent.addSingleTagListActiveEvent(parent, el);
+        viewEvent.addSingleTagListActiveEvent(parent, el, eventsUser);
     });
 }
 
@@ -2613,23 +2626,38 @@ function editTagsDropdownEvent(parent) {
     });
 }
 
-function updateValueTagEvent(parent) {
+function updateValueTagEvent(parent, eventsUser) {
     $(parent).find('.tagProjectEditInput').keyup(function (e) {
         if (e.keyCode == 13) {
             //$(parent).find('.selected').first().text( e.target.value );
             $(parent).find('.selected')[0].childNodes[0].nodeValue = e.target.value;
             $(document).trigger("click");
+            setTimeout(function (x) {
+                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent({ value: 'editTagActiveListEvent' });
+            }, 200);
         }
     });
 }
 
-function changeColorTagEvent(parent) {
+function changeColorTagEvent(parent, eventsUser) {
     $(parent).find('.tagProjectContent li').map(function (pos, el) {
         $(el).click(function (e) {
             $(parent).find('.selected').removeAttr('style').attr('class', $(e.currentTarget).attr("class") + ' selected');
             $(document).trigger("click");
+            setTimeout(function (x) {
+                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent({ value: 'editTagActiveListEvent' });
+            }, 200);
         });
     });
+}
+
+function addInputTagKeyEvent(parent, eventsUser) {
+    $(parent).find(".tagProjectDropdown").children().first().keyup(function (e) {
+        if (e.keyCode === 13) {
+            viewEvent.addTagMenuList(parent, { value: e.target.value }, eventsUser);
+            e.target.value = '';
+        }
+    });;
 }
 
 module.exports = {
@@ -2792,12 +2820,7 @@ function addMenuTag(parent) {
 
 function addTagInputMenuTag(parent) {
     var listMenuTag = $(parent).find('.tagProjectDropdown')[0];
-    $(listMenuTag).prepend('<input>').children().first().prop("placeholder", 'Add Tag').keyup(function (e) {
-        if (e.keyCode === 13) {
-            viewEvent.addTagMenuList(parent, { value: e.target.value });
-            e.target.value = '';
-        }
-    });;
+    $(listMenuTag).prepend('<input>').children().first().prop("placeholder", 'Add Tag');
 }
 
 function addTagEditDropdown(parent) {
