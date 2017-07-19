@@ -2506,11 +2506,18 @@ var $ = __webpack_require__(0);
 var events = __webpack_require__(7);
 var core = __webpack_require__(8);
 
-function init(listTagsActive, listMenuTags, parent) {
-    var eventsUser = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+function init(_ref) {
+    var _ref$listTagsActive = _ref.listTagsActive,
+        listTagsActive = _ref$listTagsActive === undefined ? {} : _ref$listTagsActive,
+        _ref$listMenuTags = _ref.listMenuTags,
+        listMenuTags = _ref$listMenuTags === undefined ? {} : _ref$listMenuTags,
+        _ref$tagContainer = _ref.tagContainer,
+        tagContainer = _ref$tagContainer === undefined ? {} : _ref$tagContainer,
+        _ref$eventsUser = _ref.eventsUser,
+        eventsUser = _ref$eventsUser === undefined ? {} : _ref$eventsUser;
 
-    core.initLists(listTagsActive, listMenuTags, parent);
-    events.initEvents(parent, eventsUser);
+    core.initLists(listTagsActive, listMenuTags, tagContainer);
+    events.initEvents(tagContainer, eventsUser);
 }
 
 module.exports = {

@@ -2506,11 +2506,18 @@ var $ = __webpack_require__(0);
 var events = __webpack_require__(7);
 var core = __webpack_require__(8);
 
-function init(listTagsActive, listMenuTags, parent) {
-    var eventsUser = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+function init(_ref) {
+    var _ref$listTagsActive = _ref.listTagsActive,
+        listTagsActive = _ref$listTagsActive === undefined ? {} : _ref$listTagsActive,
+        _ref$listMenuTags = _ref.listMenuTags,
+        listMenuTags = _ref$listMenuTags === undefined ? {} : _ref$listMenuTags,
+        _ref$tagContainer = _ref.tagContainer,
+        tagContainer = _ref$tagContainer === undefined ? {} : _ref$tagContainer,
+        _ref$eventsUser = _ref.eventsUser,
+        eventsUser = _ref$eventsUser === undefined ? {} : _ref$eventsUser;
 
-    core.initLists(listTagsActive, listMenuTags, parent);
-    events.initEvents(parent, eventsUser);
+    core.initLists(listTagsActive, listMenuTags, tagContainer);
+    events.initEvents(tagContainer, eventsUser);
 }
 
 module.exports = {
@@ -2906,21 +2913,33 @@ module.exports = {
 
 var $ = __webpack_require__(0);
 
+/*  
+ *  1. Basic Example 
+ */
 var tagProject = __webpack_require__(2);
+
+$("#tag1").map(function (pos, el) {
+    tagProject.init({ tagContainer: el });
+});
 
 var listTag = {
     'listTagsActive': [{ value: "first tag", colorBackground: "#64b6b6" }, { value: "second tag", backgroundCSS: "label-green" }, { value: "third tag" }]
 };
-
 var listTagMenu = {
     'listMenuTags': [{ value: "four tag", colorBackground: "#337ab7" }, { value: "five tag" }, { value: "six tag" }]
 };
 
-var test = function test(dataItem) {
-    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS']);
-};
+$("#tag2").map(function (pos, el) {
+    tagProject.init({ listTagsActive: listTag, listMenuTags: listTagMenu, tagContainer: el });
+});
 
 /* Remove the content to see the events fired in action
+
+
+var test = function ( dataItem ){
+    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] );
+}
+
 var tagProjectEvent = {
     addTagActiveListEvent: test, 
     deleteTagActiveListEvent: test,
@@ -2929,12 +2948,6 @@ var tagProjectEvent = {
     deleteTagMenuListEvent: test,
 }
 */
-
-$("#tag1").map(function (pos, el) {
-    tagProject.init(listTag, listTagMenu, el /* , { events : tagProjectEvent } */);
-});
-
-// tagProject.fn.deleteTagFromMenu( $(".tagProjectDropdown li").first() );
 
 /***/ })
 /******/ ]);

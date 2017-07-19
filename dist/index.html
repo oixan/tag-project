@@ -26,31 +26,186 @@
 
     </head>
     <body>
+
+        <!-- Header -->
         <div class="row">
             <div class="col-md-12">
                 <div class="containerFluid text-center" style="margin-top: 60px;">
                     <h1 style="font-family: 'Kalam', cursive;color: #337ab7;">Tag Project</h1>
-                    <h3 style="margin-top: 40px;color: #9d9d9d;">A different Tag Editor/Picker then usual</h3>
+                    <h3 style="margin-top: 40px;color: #90a1b5;">A different Tag Editor/Picker then usual</h3>
                     <p style="margin-top: 40px;"> Under Development - V. 0.4.1 </p>
                     <p style="margin-top: 40px;"><a class="btn btn-primary btn-lg"  href="https://github.com/oixan/tag-project.git" role="button">GitHub</a></p>
                 </div>
             </div>
         </div>
+        <!-- End - Header -->
 
-        <div class="row">
-            <div class="col-md-12">   
+        <!-- Content -->
+        <div class="row" style="margin-top: 60px;">
+            <div class="col-md-6 col-md-offset-3">  
+                
+                 <!-- 1. example -->
+                <h2>
+                        Inizialization ( 1. Example )
+                </h2>
+                <section style="margin-top: 50px;">
+                    <p>
+                        TagProject can be initialized as the follow ( this can change in future release to integrate it with Jquery ): 
+                    </p>
+                    <figure>
+                        <pre>
+                            <code class="language-html" data-lang="html">                          
+const tagProject = require('./index.js');
 
-                <div class="panel panel-default " style="margin: 80px;">
-                    <div class="panel-body">
-                        Basic Tag Example:
+
+$("#tag1").map( function ( pos, el ){
+    tagProject.init( {tagContainer: el} );
+});
+                            </code>
+                        </pre>
+                    </figure>
+                    <p>
+                        The result will be:
+                    </p>
+                    <div class="panel panel-default " >
+                        <div class="panel-body">
+                            <div id="tag1" class="tagProject" data-tagProject="tag" >
+                            
+                            </div>
+                        </div>
                     </div>
-                    <div id="tag1" class="tagProject" data-tagProject="tag" >
-                        
-                    </div>
-                </div>
+                </section>
+                 <!-- 1. End example -->
+
+                <!-- 2. example -->
+                <section  style="margin-top: 50px;">
+                    <p>
+                        You can Pass tags list on init: 
+                    </p>        
+                    <figure>
+                        <pre>
+                            <code class="language-html" data-lang="html">  
+var listTag = {
+    'listTagsActive': [
+                        { value: "first tag", colorBackground: "#64b6b6" },
+                        { value: "second tag", backgroundCSS: "label-green" },
+                        { value: "third tag" }
+                    ]
+}
+var listTagMenu = {
+    'listMenuTags': [
+                        { value: "four tag", colorBackground: "#337ab7" },
+                        { value: "five tag" },
+                        { value: "six tag" }
+                    ]
+}
+
+$("#tag2").map( function ( pos, el ){
+    tagProject.init( {listTagsActive:listTag, listMenuTags:listTagMenu, tagContainer: el} );
+});
+                            </code>
+                        </pre>
+                    </figure> 
+                    <p>
+                        The color of a tag can be one choosed by the default colors list or you can set a custom color with colorBackground property .                   
+                    </p>
+                    <p>TagProject with lists tags loaded on init:</p>
+                    <div class="panel panel-default " >
+                        <div class="panel-body">
+                            <div id="tag2" class="tagProject" data-tagProject="tag" >
+                            
+                            </div>
+                        </div>
+                    </div>       
+                </section>
+                <!-- End 2. example -->
+
+                <h2 style="margin-top: 70px;">
+                        Colors CSS class
+                </h2>
+                <section  style="margin-top: 50px;">
+                    <p>
+                        Bind one of the follow class with backgroundCSS property 
+                    </p> 
+                    <div class="panel panel-default " >
+                        <div class="panel-body">
+                            <ul>
+                                <li>
+                                    <span> label-red </span> <span class="label-red" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-pink </span> <span class="label-pink" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-purple </span> <span class="label-purple" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-deeppurple </span> <span class="label-deeppurple" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                   <span> label-indigo </span> <span class="label-indigo" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-blue </span> <span class="label-blue" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-lightblue </span> <span class="label-lightblue" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-cyan </span> <span class="label-cyan" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-teal </span> <span class="label-teal" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-green </span> <span class="label-green" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-lightgreen </span> <span class="label-lightgreen" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-lime </span> <span class="label-lime" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-yellow </span> <span class="label-yellow" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-amber </span> <span class="label-amber" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                   <span> label-orange </span> <span class="label-orange" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-deeporange </span> <span class="label-deeporange" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-brown </span> <span class="label-brown" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-grey </span> <span class="label-grey" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                                <li>
+                                    <span> label-bluegrey </span> <span class="label-bluegrey" style="width: 15px;height: 15px;display: inline-block;vertical-align: sub;margin-left: 10px;"  > </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> 
+
+                </section>           
 
             </div>
         </div>       
+         <!-- End - Content -->
+
+        <!-- Footer -->
+        <div class="row"  style="margin-top: 50px; border-top: 1px solid rgb(221, 221, 221);"    >
+            <div class="col-md-12" style="height: 160px;">
+                <div class="containerFluid text-center" style="margin-top: 70px;">
+                    <p style="margin-top: 40px;color: #90a1b5;">Created by <a href="#;" > Oixan </a></p>
+                </div>
+            </div>
+        </div>
+        <!-- End - Footer -->
 
     <!-- Javascript -->      
     <script type="text/javascript" src="./test.js"></script>

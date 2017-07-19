@@ -1,6 +1,16 @@
 var $ = require('../node_modules/jquery/dist/jquery.min');
 
+
+/*  
+ *  1. Basic Example 
+ */
 const tagProject = require('./index.js');
+
+
+$("#tag1").map( function ( pos, el ){
+    tagProject.init( {tagContainer: el} );
+});
+
 
 var listTag = {
     'listTagsActive': [
@@ -9,7 +19,6 @@ var listTag = {
                         { value: "third tag" }
                     ]
 }
-
 var listTagMenu = {
     'listMenuTags': [
                         { value: "four tag", colorBackground: "#337ab7" },
@@ -18,11 +27,18 @@ var listTagMenu = {
                     ]
 }
 
+$("#tag2").map( function ( pos, el ){
+    tagProject.init( {listTagsActive:listTag, listMenuTags:listTagMenu, tagContainer: el} );
+});
+
+
+/* Remove the content to see the events fired in action
+
+
 var test = function ( dataItem ){
     alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] );
 }
 
-/* Remove the content to see the events fired in action
 var tagProjectEvent = {
     addTagActiveListEvent: test, 
     deleteTagActiveListEvent: test,
@@ -31,11 +47,3 @@ var tagProjectEvent = {
     deleteTagMenuListEvent: test,
 }
 */
-
-$("#tag1").map( function ( pos, el ){
-    tagProject.init( listTag, listTagMenu, el /* , { events : tagProjectEvent } */ );
-});
-
-
-
-// tagProject.fn.deleteTagFromMenu( $(".tagProjectDropdown li").first() );
