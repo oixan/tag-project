@@ -42,6 +42,7 @@
 
         <!-- Content -->
         <div class="row" style="margin-top: 60px;">
+            
             <div class="col-md-6 col-md-offset-3">  
                 
                  <!-- 1. example -->
@@ -196,17 +197,17 @@ $("#tag2").map( function ( pos, el ){
                 <!-- End -Color Section -->
 
                 <!-- Event Section -->
-                <h2 style="margin-top: 70px;">
-                        Events ( 2. Example )
-                </h2>
-                <section  style="margin-top: 50px;">
-                    <p>
-                        You can subscribe to some events and take some action to save the changes on server side or other.
-                    </p> 
+                    <h2 style="margin-top: 70px;">
+                            Events ( 2. Example )
+                    </h2>
+                    <section  style="margin-top: 50px;">
+                        <p>
+                            You can subscribe to some events and take some action to save the changes on server side or other.
+                        </p> 
 
-                    <figure>
-                        <pre>
-                            <code class="language-html" data-lang="html">    
+                        <figure>
+                            <pre>
+                                <code class="language-html" data-lang="html">    
 ...
 
 var test = function ( dataItem ){
@@ -224,20 +225,51 @@ var tagProjectEvent = {
 $("#tag3").map( function ( pos, el ){
     tagProject.init( {listTagsActive:listTag, listMenuTags:listTagMenu, tagContainer: el, eventsUser: tagProjectEvent} );
 });
-                            </code>
-                        </pre>
-                    </figure>
+                                </code>
+                            </pre>
+                        </figure>
 
-                    <div class="panel panel-default " >
-                        <div class="panel-body">
-                            <div id="tag3" class="tagProject" data-tagProject="tag" >
-                            
+                        <div class="panel panel-default " >
+                            <div class="panel-body">
+                                <div id="tag3" class="tagProject" data-tagProject="tag" >
+                                
+                                </div>
                             </div>
-                        </div>
-                    </div>    
+                        </div>    
 
-                </section>           
+                    </section>           
                 <!-- End - Event Section -->
+
+                <!-- Disquis Comment -->
+                    <h2 style="margin-top: 70px;">
+                            Comments 
+                    </h2>
+                    <section  style="margin-top: 50px;">
+                        <div id="disqus_thread">
+
+                                    <script>
+
+                                    /**
+                                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                                    /*
+                                    var disqus_config = function () {
+                                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                    };
+                                    */
+                                    (function() { // DON'T EDIT BELOW THIS LINE
+                                    var d = document, s = d.createElement('script');
+                                    s.src = 'https://tagproject-1.disqus.com/embed.js';
+                                    s.setAttribute('data-timestamp', +new Date());
+                                    (d.head || d.body).appendChild(s);
+                                    })();
+                                </script>
+                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+                        </div>        
+                    </section>                     
+                <!-- End - Disquis Comment -->
             </div>
         </div>       
          <!-- End - Content -->
@@ -253,7 +285,6 @@ $("#tag3").map( function ( pos, el ){
         <!-- End - Footer -->
 
     <!-- Javascript -->      
-    <script type="text/javascript" src="./test.js"></script>
-
+    <script type="text/javascript" src="./test.js"></script>   
     </body>
 </html>
