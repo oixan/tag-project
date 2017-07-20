@@ -32,7 +32,9 @@ $("#tag2").map( function ( pos, el ){
 });
 
 
-/* Remove the content to see the events fired in action
+/*  
+ *  2. Basic Example 
+ */
 
 
 var test = function ( dataItem ){
@@ -46,4 +48,7 @@ var tagProjectEvent = {
     addTagMenuListEvent: test,
     deleteTagMenuListEvent: test,
 }
-*/
+
+$("#tag3").map( function ( pos, el ){
+    tagProject.init( {listTagsActive:listTag, listMenuTags:listTagMenu, tagContainer: el, eventsUser: tagProjectEvent} );
+});

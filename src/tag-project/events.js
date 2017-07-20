@@ -98,8 +98,8 @@ function updateValueTagEvent( parent, eventsUser ){
             $(parent).find('.selected')[0].childNodes[0].nodeValue =  e.target.value;
             $(document).trigger( "click" );
             setTimeout( x => {
-            if ( eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent )
-                eventsUser.events.editTagActiveListEvent( viewEvent.tagToObject( $(parent).find('.selected')[0] )  );
+            if ( eventsUser && eventsUser.editTagActiveListEvent )
+                eventsUser.editTagActiveListEvent( viewEvent.tagToObject( $(parent).find('.selected')[0] )  );
             }, 200);
         }
     });
@@ -113,8 +113,8 @@ function changeColorTagEvent( parent, eventsUser ){
                     $(parent).find('.selected').removeAttr( 'style' ).attr('class', $(e.currentTarget).attr("class") + ' selected' );
                     $(document).trigger("click");
                     setTimeout( x => {
-                    if ( eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent )
-                        eventsUser.events.editTagActiveListEvent( viewEvent.tagToObject( $(parent).find('.selected')[0] ) );
+                    if ( eventsUser && eventsUser.editTagActiveListEvent )
+                        eventsUser.editTagActiveListEvent( viewEvent.tagToObject( $(parent).find('.selected')[0] ) );
                     }, 200);
                 }
             );

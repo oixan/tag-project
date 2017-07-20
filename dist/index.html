@@ -120,6 +120,7 @@ $("#tag2").map( function ( pos, el ){
                 </section>
                 <!-- End 2. example -->
 
+                <!-- Color Section -->
                 <h2 style="margin-top: 70px;">
                         Colors CSS class
                 </h2>
@@ -192,7 +193,51 @@ $("#tag2").map( function ( pos, el ){
                     </div> 
 
                 </section>           
+                <!-- End -Color Section -->
 
+                <!-- Event Section -->
+                <h2 style="margin-top: 70px;">
+                        Events ( 2. Example )
+                </h2>
+                <section  style="margin-top: 50px;">
+                    <p>
+                        You can subscribe to some events and take some action to save the changes on server side or other.
+                    </p> 
+
+                    <figure>
+                        <pre>
+                            <code class="language-html" data-lang="html">    
+...
+
+var test = function ( dataItem ){
+    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] );
+}
+
+var tagProjectEvent = {
+    addTagActiveListEvent: test, 
+    deleteTagActiveListEvent: test,
+    editTagActiveListEvent: test,
+    addTagMenuListEvent: test,
+    deleteTagMenuListEvent: test,
+}
+
+$("#tag3").map( function ( pos, el ){
+    tagProject.init( {listTagsActive:listTag, listMenuTags:listTagMenu, tagContainer: el, eventsUser: tagProjectEvent} );
+});
+                            </code>
+                        </pre>
+                    </figure>
+
+                    <div class="panel panel-default " >
+                        <div class="panel-body">
+                            <div id="tag3" class="tagProject" data-tagProject="tag" >
+                            
+                            </div>
+                        </div>
+                    </div>    
+
+                </section>           
+                <!-- End - Event Section -->
             </div>
         </div>       
          <!-- End - Content -->

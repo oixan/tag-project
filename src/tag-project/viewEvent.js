@@ -15,8 +15,8 @@ var addTagMenuList = function  addTagMenuList( parent, tag, eventsUser ){
     addSingleTagListActiveEvent( parent, newTagActive, eventsUser );        
     closeSingleTagMenuEvent( newTagActive, eventsUser );   
     setTimeout( x => {
-        if ( eventsUser && eventsUser.events && eventsUser.events.addTagMenuListEvent )
-            eventsUser.events.addTagMenuListEvent( tagToObject(newTagActive) );
+        if ( eventsUser && eventsUser.addTagMenuListEvent )
+            eventsUser.addTagMenuListEvent( tagToObject(newTagActive) );
     }, 200);                                      
 }
 
@@ -32,8 +32,8 @@ var addSingleTagListActiveEvent = function ( parent, tag, eventsUser){
         editSingleTagEditDropdownEvent( newTagActive );
         $(document).trigger("click");
         setTimeout( x => {
-            if ( eventsUser && eventsUser.events && eventsUser.events.addTagActiveListEvent )
-                eventsUser.events.addTagActiveListEvent( tagToObject(newTagActive) );
+            if ( eventsUser && eventsUser.addTagActiveListEvent )
+                eventsUser.addTagActiveListEvent( tagToObject(newTagActive) );
         }, 200);
         e.stopPropagation();
                 
@@ -46,8 +46,8 @@ var closeSingleTagMenuEvent = function ( tag, eventsUser ){
             var tagInMenuList = e.target.parentElement;
             deletetagFromMenuList( tagInMenuList );
             setTimeout( x => {
-                if ( eventsUser && eventsUser.events && eventsUser.events.deleteTagMenuListEvent )
-                    eventsUser.events.deleteTagMenuListEvent( tagToObject(tag) );
+                if ( eventsUser && eventsUser.deleteTagMenuListEvent )
+                    eventsUser.deleteTagMenuListEvent( tagToObject(tag) );
             }, 200);            
             e.stopPropagation();
         }
@@ -70,8 +70,8 @@ var closeSingleTagListEvent = function ( parent, tag, eventsUser ){
         addSingleTagListActiveEvent( parent, newTagMenu, eventsUser );
         $(document).trigger( 'click' );
         setTimeout( x => {
-            if ( eventsUser && eventsUser.events && eventsUser.events.deleteTagActiveListEvent )
-                eventsUser.events.deleteTagActiveListEvent( tagToObject(newTagMenu) );
+            if ( eventsUser && eventsUser.deleteTagActiveListEvent )
+                eventsUser.deleteTagActiveListEvent( tagToObject(newTagMenu) );
         }, 200);
         e.stopPropagation();
     });

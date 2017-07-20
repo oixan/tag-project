@@ -2372,7 +2372,7 @@ var addTagMenuList = function addTagMenuList(parent, tag, eventsUser) {
     addSingleTagListActiveEvent(parent, newTagActive, eventsUser);
     closeSingleTagMenuEvent(newTagActive, eventsUser);
     setTimeout(function (x) {
-        if (eventsUser && eventsUser.events && eventsUser.events.addTagMenuListEvent) eventsUser.events.addTagMenuListEvent(tagToObject(newTagActive));
+        if (eventsUser && eventsUser.addTagMenuListEvent) eventsUser.addTagMenuListEvent(tagToObject(newTagActive));
     }, 200);
 };
 
@@ -2388,7 +2388,7 @@ var addSingleTagListActiveEvent = function addSingleTagListActiveEvent(parent, t
         editSingleTagEditDropdownEvent(newTagActive);
         $(document).trigger("click");
         setTimeout(function (x) {
-            if (eventsUser && eventsUser.events && eventsUser.events.addTagActiveListEvent) eventsUser.events.addTagActiveListEvent(tagToObject(newTagActive));
+            if (eventsUser && eventsUser.addTagActiveListEvent) eventsUser.addTagActiveListEvent(tagToObject(newTagActive));
         }, 200);
         e.stopPropagation();
     });
@@ -2399,7 +2399,7 @@ var closeSingleTagMenuEvent = function closeSingleTagMenuEvent(tag, eventsUser) 
         var tagInMenuList = e.target.parentElement;
         deletetagFromMenuList(tagInMenuList);
         setTimeout(function (x) {
-            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagMenuListEvent) eventsUser.events.deleteTagMenuListEvent(tagToObject(tag));
+            if (eventsUser && eventsUser.deleteTagMenuListEvent) eventsUser.deleteTagMenuListEvent(tagToObject(tag));
         }, 200);
         e.stopPropagation();
     });
@@ -2421,7 +2421,7 @@ var closeSingleTagListEvent = function closeSingleTagListEvent(parent, tag, even
         addSingleTagListActiveEvent(parent, newTagMenu, eventsUser);
         $(document).trigger('click');
         setTimeout(function (x) {
-            if (eventsUser && eventsUser.events && eventsUser.events.deleteTagActiveListEvent) eventsUser.events.deleteTagActiveListEvent(tagToObject(newTagMenu));
+            if (eventsUser && eventsUser.deleteTagActiveListEvent) eventsUser.deleteTagActiveListEvent(tagToObject(newTagMenu));
         }, 200);
         e.stopPropagation();
     });
@@ -2660,7 +2660,7 @@ function updateValueTagEvent(parent, eventsUser) {
             $(parent).find('.selected')[0].childNodes[0].nodeValue = e.target.value;
             $(document).trigger("click");
             setTimeout(function (x) {
-                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent(viewEvent.tagToObject($(parent).find('.selected')[0]));
+                if (eventsUser && eventsUser.editTagActiveListEvent) eventsUser.editTagActiveListEvent(viewEvent.tagToObject($(parent).find('.selected')[0]));
             }, 200);
         }
     });
@@ -2672,7 +2672,7 @@ function changeColorTagEvent(parent, eventsUser) {
             $(parent).find('.selected').removeAttr('style').attr('class', $(e.currentTarget).attr("class") + ' selected');
             $(document).trigger("click");
             setTimeout(function (x) {
-                if (eventsUser && eventsUser.events && eventsUser.events.editTagActiveListEvent) eventsUser.events.editTagActiveListEvent(viewEvent.tagToObject($(parent).find('.selected')[0]));
+                if (eventsUser && eventsUser.editTagActiveListEvent) eventsUser.editTagActiveListEvent(viewEvent.tagToObject($(parent).find('.selected')[0]));
             }, 200);
         });
     });
@@ -2933,21 +2933,25 @@ $("#tag2").map(function (pos, el) {
     tagProject.init({ listTagsActive: listTag, listMenuTags: listTagMenu, tagContainer: el });
 });
 
-/* Remove the content to see the events fired in action
+/*  
+ *  2. Basic Example 
+ */
 
-
-var test = function ( dataItem ){
-    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] );
-}
+var test = function test(dataItem) {
+    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS']);
+};
 
 var tagProjectEvent = {
-    addTagActiveListEvent: test, 
+    addTagActiveListEvent: test,
     deleteTagActiveListEvent: test,
     editTagActiveListEvent: test,
     addTagMenuListEvent: test,
-    deleteTagMenuListEvent: test,
-}
-*/
+    deleteTagMenuListEvent: test
+};
+
+$("#tag3").map(function (pos, el) {
+    tagProject.init({ listTagsActive: listTag, listMenuTags: listTagMenu, tagContainer: el, eventsUser: tagProjectEvent });
+});
 
 /***/ })
 /******/ ]);
