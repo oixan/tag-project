@@ -108,12 +108,16 @@ function tagToObject( tag ){
         value = tag[0].childNodes[0].nodeValue;
     else   
         value = tag.childNodes[0].nodeValue;
+
     var colorBackground = ( $(tag).attr('style')?rgb2hex($(tag).attr('style')): '' );
     colorBackground = colorBackground.replace('background-color:','');
+
     var backgroundCSS = $(tag).attr('class');
     backgroundCSS = backgroundCSS.replace('selected','');
 
-    return { value: value, colorBackground: colorBackground, backgroundCSS: backgroundCSS };
+    var idTag = $(tag).attr('data-id');
+
+    return { value: value, colorBackground: colorBackground, backgroundCSS: backgroundCSS, id: idTag };
 }
 
 function rgb2hex(orig){

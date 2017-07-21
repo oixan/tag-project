@@ -30,7 +30,11 @@ var loadListTagsActive = function (parent, listTags){
         else
             tag.colorBackground = ( tag.colorBackground? tag.colorBackground : '#03A9F4' ) ;
 
-        $("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "' >"   + tag.value +
+        let idAttribute = '';
+        if ( tag.id )
+            idAttribute = " data-id='" + tag.id + "' ";
+
+        $("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "' " +   idAttribute + ">"   + tag.value +
                         "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
     }
 }
@@ -45,7 +49,11 @@ var loadListMenuTags = function (parent, listTags){
             else
                 tag.colorBackground = ( tag.colorBackground? tag.colorBackground : '#03A9F4' ) ;
 
-            $(dropdown).append("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "' >"
+            let idAttribute = '';
+            if ( tag.id )
+                idAttribute = " data-id='" + tag.id + "' ";
+
+            $(dropdown).append("<li style=background-color:" + tag.colorBackground +  " class='" + (tag.backgroundCSS?tag.backgroundCSS:'') + "'" + idAttribute + ">"
                                     + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
         }
     }

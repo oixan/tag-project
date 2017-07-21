@@ -2450,12 +2450,16 @@ var deletetagFromMenuList = function deletetagFromMenuList(element) {
 function tagToObject(tag) {
     var value;
     if (tag[0]) value = tag[0].childNodes[0].nodeValue;else value = tag.childNodes[0].nodeValue;
+
     var colorBackground = $(tag).attr('style') ? rgb2hex($(tag).attr('style')) : '';
     colorBackground = colorBackground.replace('background-color:', '');
+
     var backgroundCSS = $(tag).attr('class');
     backgroundCSS = backgroundCSS.replace('selected', '');
 
-    return { value: value, colorBackground: colorBackground, backgroundCSS: backgroundCSS };
+    var idTag = $(tag).attr('data-id');
+
+    return { value: value, colorBackground: colorBackground, backgroundCSS: backgroundCSS, id: idTag };
 }
 
 function rgb2hex(orig) {
@@ -2776,7 +2780,10 @@ var loadListTagsActive = function loadListTagsActive(parent, listTags) {
 
             if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
 
-            $("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
+            var idAttribute = '';
+            if (tag.id) idAttribute = " data-id='" + tag.id + "' ";
+
+            $("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' " + idAttribute + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>").insertBefore(ulLastElement);
         }
     } catch (err) {
         _didIteratorError = true;
@@ -2808,7 +2815,10 @@ var loadListMenuTags = function loadListMenuTags(parent, listTags) {
 
                 if (tag.backgroundCSS) tag.colorBackground = '';else tag.colorBackground = tag.colorBackground ? tag.colorBackground : '#03A9F4';
 
-                $(dropdown).append("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "' >" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
+                var idAttribute = '';
+                if (tag.id) idAttribute = " data-id='" + tag.id + "' ";
+
+                $(dropdown).append("<li style=background-color:" + tag.colorBackground + " class='" + (tag.backgroundCSS ? tag.backgroundCSS : '') + "'" + idAttribute + ">" + tag.value + "<i class='fa fa-times' aria-hidden='true'></i> </li>");
             }
         } catch (err) {
             _didIteratorError2 = true;

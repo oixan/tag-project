@@ -90,13 +90,13 @@ var listTag = {
     'listTagsActive': [
                         { value: "first tag", colorBackground: "#64b6b6" },
                         { value: "second tag", backgroundCSS: "label-green" },
-                        { value: "third tag" }
+                        { value: "third tag", id: "qw165sd-as1356qwe" }
                     ]
 }
 var listTagMenu = {
     'listMenuTags': [
-                        { value: "four tag", colorBackground: "#337ab7" },
-                        { value: "five tag" },
+                        { value: "four tag", colorBackground: "#337ab7", id: "qw165sd-as1356qwe" },
+                        { value: "five tag", id: "qw165sd-as1356qwe" },
                         { value: "six tag" }
                     ]
 }
@@ -211,7 +211,7 @@ $("#tag2").map( function ( pos, el ){
 ...
 
 var test = function ( dataItem ){
-    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] );
+    alert('Value: ' + dataItem['value'] + ' - colorBackgour: ' + dataItem['colorBackground'] + ' - backgroundCSS: ' + dataItem['backgroundCSS'] + ' - idTag: ' + dataItem['id']  );
 }
 
 var tagProjectEvent = {
