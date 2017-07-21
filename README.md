@@ -38,8 +38,8 @@ Open the index.html page in dist folder.
 - 0.6.0 ( new features - long term )
   - infinity autoscroll on menu lists tag
   - autocomplete when insert a tag.
-- 0.5.0 ( new features )
-  - saving id on data-tagId attribute on every li element.
+- 0.5.0 
+  - saving id on data-Id attribute on every li element.
 - 0.4.1 
   - Fix 
 - 0.4.0 
