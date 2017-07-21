@@ -40,6 +40,7 @@ Open the index.html page in dist folder.
   - autocomplete when insert a tag.
 - 0.5.0 
   - saving id on data-Id attribute on every li element.
+  - return id field when events occured.
 - 0.4.1 
   - Fix 
 - 0.4.0 
